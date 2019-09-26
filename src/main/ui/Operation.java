@@ -24,7 +24,7 @@ public class Operation {
 
     //REQUIRES: the input equals to the movie's name
     //EFFECTS: execute printAll() method to the given movie
-    void chooseMovie() {
+    public void chooseMovie() {
 
         Scanner s;
         s = new Scanner(System.in); //field
@@ -39,7 +39,7 @@ public class Operation {
     }
 
     //EFFECTS: print out all the information of the given movie
-    private void printAll(Movie m) {
+    public void printAll(Movie m) {
         System.out.println("Movie name:" + m.getName());
         System.out.println("Price:" + m.getPrice());
         System.out.println("Show time:" + m.getShowTime());
@@ -48,7 +48,7 @@ public class Operation {
     //REQUIRES: the input equals to the string "Yes" or "No"
     //MODIFIES: loopState
     //EFFECTS: if entering "NO", loopState = true. Otherwise, loopState = false
-    void exit() {
+    public void exit() {
         Scanner s;
         s = new Scanner(System.in);
         String choose = "";

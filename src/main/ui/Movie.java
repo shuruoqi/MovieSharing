@@ -1,7 +1,5 @@
 package ui;
 
-import java.util.Scanner;
-
 public class Movie {
     private String name; //field
     private int showTime;
