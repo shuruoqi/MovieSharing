@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ui.Movie;
+import model.Movie;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

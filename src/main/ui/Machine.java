@@ -1,17 +1,18 @@
 package ui;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.IOException;
 
 public class Machine {
-    public ArrayList<Movie> movieList;
-    public Scanner scanner;
 
-    public static void main(String[] args) {
-        Operation operation = new Operation(); //local
-        Loop loop = new Loop();
+    public static void main(String[] args) throws IOException {
+        Operation operation = new Operation();
         System.out.println("Welcome!");
-        loop.operationLoop();
+        operation.operationSetUp();
+        operation.start();
+        operation.chooseMovieLoop();
+        operation.printWatchlist();
+        operation.deleteMovieLoop();
+        operation.printWatchlist();
         System.out.println("Bye!");
     }
 }
