@@ -1,3 +1,0 @@
-Thor,1400,17
-Spiderman,1430,15
-Captain America,1700,16

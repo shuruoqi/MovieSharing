@@ -1,18 +1,20 @@
 package ui;
 
+import model.MLOperation;
+
 import java.io.IOException;
 
 public class Machine {
 
     public static void main(String[] args) throws IOException {
-        Operation operation = new Operation();
+        MLOperation wloperation = new WLOperation();
         System.out.println("Welcome!");
-        operation.operationSetUp();
-        operation.start();
-        operation.chooseMovieLoop();
-        operation.printWatchlist();
-        operation.deleteMovieLoop();
-        operation.printWatchlist();
+        wloperation.operationSetUp();
+        wloperation.start();
+        wloperation.chooseMovieLoop();
+        wloperation.printWatchlist();
+        wloperation.deleteMovieLoop();
+        wloperation.printWatchlist();
         System.out.println("Bye!");
     }
 }

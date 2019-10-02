@@ -1,13 +1,14 @@
 package ui;
 
 import model.Movie;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Watchlist {
     public ArrayList<Movie> watchList;
     Scanner scanner;
+    boolean chooseMovieLoopState = true;
+    boolean deleteMovieLoopState = true;
 
     //EFFECTS: construct a new watchList
     public void watchListSetUp() {
@@ -51,6 +52,20 @@ public class Watchlist {
         }
     }
 
+    public String continueToChooseMovieScanner() {
+        scanner = new Scanner(System.in);
+        System.out.println("Continue to choose movie? [Yes] [No]");
+        return scanner.nextLine();
+    }
+
+    public Boolean continueToChooseMovieResult(String choice) {
+        if (choice.equals("Yes")) {
+            return chooseMovieLoopState = true;
+        } else {
+            return chooseMovieLoopState = false;
+        }
+    }
+
     //EFFECTS: add the given movie to watchlist if it is not already in it
     public void insertMovieToWatchlist(Movie movie) {
         if (watchList.contains(movie)) {
@@ -85,4 +100,19 @@ public class Watchlist {
             return false;
         }
     }
+
+    public String continueToDeleteMovieScanner() {
+        scanner = new Scanner(System.in);
+        System.out.println("Continue to delete movie? [Yes] [No]");
+        return scanner.nextLine();
+    }
+
+    public Boolean continueToDeleteMovieResult(String choice) {
+        if (choice.equals("Yes")) {
+            return deleteMovieLoopState = true;
+        } else {
+            return deleteMovieLoopState = false;
+        }
+    }
+
 }

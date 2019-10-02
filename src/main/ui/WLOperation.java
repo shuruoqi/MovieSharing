@@ -1,21 +1,16 @@
 package ui;
 
-import model.Load;
-import model.Movie;
-import model.Save;
+import model.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Operation {
-    public ArrayList<Movie> movieList;//field
+public class WLOperation implements MLOperation {
+    public ArrayList<Movie> cinemaList;//field
     Watchlist watchlist;
-    boolean chooseMovieLoopState = true;
-    boolean deleteMovieLoopState = true;
-    Scanner scanner;
-    Load load;
-    Save save;
+    Loadable load;
+    Saveable save;
 
     Movie spiderman = new Movie("Spiderman", 1430, 15);
     Movie ironman = new Movie("Ironman", 1630, 16);
@@ -26,18 +21,17 @@ public class Operation {
     public void operationSetUp() {
         watchlist = new Watchlist();
         watchlist.watchListSetUp();
-        movieList = new ArrayList<>();
-        movieList.add(spiderman);
-        movieList.add(ironman);
-        movieList.add(captainAmerica);
-        movieList.add(thor);
+        cinemaList = new ArrayList<>();
+        cinemaList.add(spiderman);
+        cinemaList.add(ironman);
+        cinemaList.add(captainAmerica);
+        cinemaList.add(thor);
     }
 
-    //EFFECTS:
+    //EFFECTS: set up watchList according to the storage
     public void start() throws IOException {
         load = new Load();
-        load.load("WatchListFile.txt");
-        watchlist.watchList = load.movies;
+        watchlist.watchList = load.load("WatchListFile.txt");
     }
 
     //REQUIRES: the input equals to the movie's name
@@ -45,7 +39,7 @@ public class Operation {
     //         add the given movie into the watchList
     public void chooseMovie() {
         String movieChoice = watchlist.chooseMovieScanner();
-        for (Movie next : movieList) { //loop
+        for (Movie next : cinemaList) { //loop
             if (next.getName().equals(movieChoice)) { //condition
                 watchlist.printAll(next);
                 if (watchlist.addToWatchlistResult(watchlist.addToWatchlistScanner())) {
@@ -56,22 +50,15 @@ public class Operation {
     }
 
     //REQUIRES: the input equals to the string "Yes" or "No"
-    //MODIFIES: deleteMovieLoopState
+    //MODIFIES: chooseMovieLoopState
     //EFFECTS: if entering "NO", loopState = true. Otherwise, loopState = false
-    public void continueToDeleteMovie() {
-        scanner = new Scanner(System.in);
-        System.out.println("Continue to delete movie? [Yes] [No]");
-        String choose = scanner.nextLine();
-        if (choose.equals("Yes")) {
-            deleteMovieLoopState = true;
-        } else {
-            deleteMovieLoopState = false;
-        }
+    public void continueToChooseMovie() {
+        watchlist.continueToChooseMovieResult(watchlist.continueToChooseMovieScanner());
     }
 
     //EFFECTS: continue to choose movies or quit base on user's choice
     public void chooseMovieLoop() {
-        while (chooseMovieLoopState) {
+        while (watchlist.chooseMovieLoopState) {
             chooseMovie();
             continueToChooseMovie();
         }
@@ -93,24 +80,17 @@ public class Operation {
     }
 
     //REQUIRES: the input equals to the string "Yes" or "No"
-    //MODIFIES: chooseMovieLoopState
+    //MODIFIES: deleteMovieLoopState
     //EFFECTS: if entering "NO", loopState = true. Otherwise, loopState = false
-    public void continueToChooseMovie() {
-        scanner = new Scanner(System.in);
-        System.out.println("Continue to choose movie? [Yes] [No]");
-        String choose = scanner.nextLine();
-        if (choose.equals("Yes")) {
-            chooseMovieLoopState = true;
-        } else {
-            chooseMovieLoopState = false;
-        }
+    public void continueToDeleteMovie() {
+        watchlist.continueToDeleteMovieResult(watchlist.continueToDeleteMovieScanner());
     }
 
     //EFFECTS: continue to delete movies or quit base on user's choice
     public void deleteMovieLoop() throws IOException {
         save = new Save();
         if (watchlist.deleteFromWatchlistResult(watchlist.deleteFromWatchlistScanner())) {
-            while (deleteMovieLoopState) {
+            while (watchlist.deleteMovieLoopState) {
                 deleteMovie();
                 continueToDeleteMovie();
             }
