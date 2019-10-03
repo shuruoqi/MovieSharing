@@ -68,13 +68,21 @@ public class Watchlist {
 
     //EFFECTS: add the given movie to watchlist if it is not already in it
     public void insertMovieToWatchlist(Movie movie) {
-        if (watchList.contains(movie)) {
+        if (checkRepetition(movie)) {
             System.out.println("Already in the watchlist.");
         } else {
             watchList.add(movie);
         }
     }
 
+    public boolean checkRepetition(Movie movie) {
+        for (Movie next : watchList) {
+            if (movie.getName().equals(next.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     //EFFECTS: asking for user input for deleting movie choice,
     //         return the user input string

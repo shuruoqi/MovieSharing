@@ -30,8 +30,8 @@ public class SaveTest {
 
     @Test
     public void testSave() throws IOException {
-        testSave.save(testWatchlist.watchList,"SaveTestFile.txt");
-        List<String> lines = Files.readAllLines(Paths.get("SaveTestFile.txt"));
+        testSave.save(testWatchlist.watchList,"./data/SaveTestFile.txt");
+        List<String> lines = Files.readAllLines(Paths.get("./data/SaveTestFile.txt"));
         assertEquals(lines.get(0), "Movie1,1000,1");
         assertEquals(lines.get(1), "Movie2,2000,2");
     }

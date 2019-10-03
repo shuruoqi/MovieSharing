@@ -31,7 +31,7 @@ public class WLOperation implements MLOperation {
     //EFFECTS: set up watchList according to the storage
     public void start() throws IOException {
         load = new Load();
-        watchlist.watchList = load.load("WatchListFile.txt");
+        watchlist.watchList = load.load("./data/WatchListFile.txt");
     }
 
     //REQUIRES: the input equals to the movie's name
@@ -95,11 +95,11 @@ public class WLOperation implements MLOperation {
                 continueToDeleteMovie();
             }
         }
-        save.save(watchlist.getWatchList(),"WatchListFile.txt");
+        save.save(watchlist.getWatchList(),"./data/WatchListFile.txt");
     }
 
     //EFFECTS: print all the names of the movies in the watchList
-    public void printWatchlist() {
+    public void printNameList() {
         ArrayList<String> nameList = new ArrayList<>();
         for (Movie next : watchlist.getWatchList()) {
             nameList.add(next.getName());

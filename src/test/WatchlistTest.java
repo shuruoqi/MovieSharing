@@ -3,18 +3,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ui.Watchlist;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class WatchlistTest {
     Watchlist testWatchlist;
-    Movie testMovie;
+    Movie testMovie1;
+    Movie testMovie2;
 
     @BeforeEach
     public void setUp() {
         testWatchlist = new Watchlist();
-        testMovie = new Movie("name",800,2);
+        testMovie1 = new Movie("name",800,2);
+        testMovie2 = new Movie("name2",900,12);
         testWatchlist.watchListSetUp();
-        testWatchlist.watchList.add(testMovie);
+        testWatchlist.watchList.add(testMovie1);
     }
 
     @Test
@@ -33,5 +35,11 @@ public class WatchlistTest {
     public void testDeleteFromWatchlistResult() {
         assertEquals(true, testWatchlist.deleteFromWatchlistResult("Yes"));
         assertEquals(false, testWatchlist.deleteFromWatchlistResult("No"));
+    }
+
+    @Test
+    public void testCheckRepetition() {
+        assertTrue(testWatchlist.checkRepetition(testMovie1));
+        assertFalse(testWatchlist.checkRepetition(testMovie2));
     }
 }

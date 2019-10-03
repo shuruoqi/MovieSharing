@@ -8,7 +8,7 @@ public interface MLOperation {
 
     void start() throws IOException;
 
-    void printWatchlist();
+    void printNameList();
 
     void chooseMovieLoop();
 

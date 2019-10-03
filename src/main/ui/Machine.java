@@ -12,9 +12,9 @@ public class Machine {
         wloperation.operationSetUp();
         wloperation.start();
         wloperation.chooseMovieLoop();
-        wloperation.printWatchlist();
+        wloperation.printNameList();
         wloperation.deleteMovieLoop();
-        wloperation.printWatchlist();
+        wloperation.printNameList();
         System.out.println("Bye!");
     }
 }
