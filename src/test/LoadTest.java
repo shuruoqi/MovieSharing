@@ -1,6 +1,5 @@
 import model.Load;
 import org.junit.jupiter.api.Test;
-import ui.Watchlist;
 
 import java.io.IOException;
 
@@ -13,10 +12,12 @@ public class LoadTest {
     public void testLoad() throws IOException {
         testLoad.load("./data/LoadTestFile.txt");
         assertEquals("Movie1", testLoad.movies.get(0).getName());
-        assertEquals(1000, testLoad.movies.get(0).getShowTime());
-        assertEquals(1, testLoad.movies.get(0).getPrice());
+        assertEquals("regular", testLoad.movies.get(0).getType());
+        assertEquals("1080p", testLoad.movies.get(0).getQuality());
+        assertEquals(1.0, testLoad.movies.get(0).getSize());
         assertEquals("Movie2", testLoad.movies.get(1).getName());
-        assertEquals(2000, testLoad.movies.get(1).getShowTime());
-        assertEquals(2, testLoad.movies.get(1).getPrice());
+        assertEquals("VIP", testLoad.movies.get(1).getType());
+        assertEquals("720p", testLoad.movies.get(1).getQuality());
+        assertEquals(2.0, testLoad.movies.get(1).getSize());
     }
 }

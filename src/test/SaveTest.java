@@ -1,5 +1,7 @@
 import model.Movie;
+import model.RegularMovie;
 import model.Save;
+import model.VipMovie;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ui.Watchlist;
@@ -20,10 +22,10 @@ public class SaveTest {
     @BeforeEach
     public void setUp() throws IOException{
         testSave = new Save();
-        testMovie1 = new Movie("Movie1" , 1000, 1);
-        testMovie2 = new Movie("Movie2" , 2000, 2);
+        testMovie1 = new RegularMovie("Movie1" , "720p", 1.0);
+        testMovie2 = new VipMovie("Movie2" , "1080p", 2.0);
         testWatchlist = new Watchlist();
-        testWatchlist.watchListSetUp();
+        testWatchlist.listSetUp();
         testWatchlist.watchList.add(testMovie1);
         testWatchlist.watchList.add(testMovie2);
     }
@@ -32,8 +34,8 @@ public class SaveTest {
     public void testSave() throws IOException {
         testSave.save(testWatchlist.watchList,"./data/SaveTestFile.txt");
         List<String> lines = Files.readAllLines(Paths.get("./data/SaveTestFile.txt"));
-        assertEquals(lines.get(0), "Movie1,1000,1");
-        assertEquals(lines.get(1), "Movie2,2000,2");
+        assertEquals(lines.get(0), "Movie1,regular,720p,1.0");
+        assertEquals(lines.get(1), "Movie2,VIP,1080p,2.0");
     }
 
 }

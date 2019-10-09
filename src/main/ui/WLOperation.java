@@ -4,34 +4,29 @@ import model.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class WLOperation implements MLOperation {
-    public ArrayList<Movie> cinemaList;//field
+public class WLOperation {
+    Cinemalist cinemalist;
     Watchlist watchlist;
-    Loadable load;
-    Saveable save;
-
-    Movie spiderman = new Movie("Spiderman", 1430, 15);
-    Movie ironman = new Movie("Ironman", 1630, 16);
-    Movie captainAmerica = new Movie("Captain America", 1700, 16);
-    Movie thor = new Movie("Thor", 1400, 17);
+    Loadable loadWL;
+    Loadable loadCL;
+    Saveable saveWL;
 
     //EFFECTS: Build a new list and add objects into it
-    public void operationSetUp() {
+    public void operationSetUp() throws IOException {
+        cinemalist = new Cinemalist();
+        cinemalist.listSetUp();
         watchlist = new Watchlist();
-        watchlist.watchListSetUp();
-        cinemaList = new ArrayList<>();
-        cinemaList.add(spiderman);
-        cinemaList.add(ironman);
-        cinemaList.add(captainAmerica);
-        cinemaList.add(thor);
+        watchlist.listSetUp();
+
     }
 
     //EFFECTS: set up watchList according to the storage
     public void start() throws IOException {
-        load = new Load();
-        watchlist.watchList = load.load("./data/WatchListFile.txt");
+        loadWL = new Load();
+        watchlist.watchList = loadWL.load("./data/WatchListFile.txt");
+        loadCL = new Load();
+        cinemalist.cinemaList = loadCL.load("./data/CinemaListFile.txt");
     }
 
     //REQUIRES: the input equals to the movie's name
@@ -39,11 +34,11 @@ public class WLOperation implements MLOperation {
     //         add the given movie into the watchList
     public void chooseMovie() {
         String movieChoice = watchlist.chooseMovieScanner();
-        for (Movie next : cinemaList) { //loop
+        for (Movie next : cinemalist.cinemaList) { //loop
             if (next.getName().equals(movieChoice)) { //condition
-                watchlist.printAll(next);
-                if (watchlist.addToWatchlistResult(watchlist.addToWatchlistScanner())) {
-                    watchlist.insertMovieToWatchlist(next);
+                watchlist.printAllInfo(next);
+                if (watchlist.addToListResult(watchlist.addToListScanner())) {
+                    watchlist.insertMovieToList(next);
                 }
             }
         }
@@ -68,8 +63,8 @@ public class WLOperation implements MLOperation {
     //EFFECTS: remove the given movie from the watchList
     public void deleteMovie() {
         String movieChoice = watchlist.deleteMovieScanner();
-        Movie toBeRemoved = new Movie("", 0000, 0);
-        for (Movie next : watchlist.getWatchList()) {
+        Movie toBeRemoved = null;
+        for (Movie next : watchlist.getList()) {
             if (next.getName().equals(movieChoice)) {
                 if (watchlist.deleteFromWatchlistResult(watchlist.deleteFromWatchlistScanner())) {
                     toBeRemoved = next;
@@ -88,20 +83,20 @@ public class WLOperation implements MLOperation {
 
     //EFFECTS: continue to delete movies or quit base on user's choice
     public void deleteMovieLoop() throws IOException {
-        save = new Save();
+        saveWL = new Save();
         if (watchlist.deleteFromWatchlistResult(watchlist.deleteFromWatchlistScanner())) {
             while (watchlist.deleteMovieLoopState) {
                 deleteMovie();
                 continueToDeleteMovie();
             }
         }
-        save.save(watchlist.getWatchList(),"./data/WatchListFile.txt");
+        saveWL.save(watchlist.getList(),"./data/WatchListFile.txt");
     }
 
     //EFFECTS: print all the names of the movies in the watchList
     public void printNameList() {
         ArrayList<String> nameList = new ArrayList<>();
-        for (Movie next : watchlist.getWatchList()) {
+        for (Movie next : watchlist.getList()) {
             nameList.add(next.getName());
         }
         System.out.println("Your watchlist : " + nameList);

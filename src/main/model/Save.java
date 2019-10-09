@@ -9,8 +9,8 @@ public class Save implements Saveable {
     public void save(ArrayList<Movie> movies, String textfile) throws IOException {
         PrintWriter writer = new PrintWriter(textfile, "UTF-8");
         for (Movie m : movies) {
-            System.out.println(m.getName() + "," + m.getShowTime() + "," + m.getPrice());
-            writer.println(m.getName() + "," + m.getShowTime() + "," + m.getPrice());
+            System.out.println(m.getName() + "," + m.getType() + "," + m.getQuality() + "," + m.getSize());
+            writer.println(m.getName() + "," + m.getType() + "," + m.getQuality() + "," + m.getSize());
         }
         writer.close();
     }

@@ -1,4 +1,5 @@
 import model.Movie;
+import model.RegularMovie;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ui.Watchlist;
@@ -13,28 +14,28 @@ public class WatchlistTest {
     @BeforeEach
     public void setUp() {
         testWatchlist = new Watchlist();
-        testMovie1 = new Movie("name",800,2);
-        testMovie2 = new Movie("name2",900,12);
-        testWatchlist.watchListSetUp();
+        testMovie1 = new RegularMovie("name1","720p",2);
+        testMovie2 = new RegularMovie("name2","1080p",12);
+        testWatchlist.listSetUp();
         testWatchlist.watchList.add(testMovie1);
     }
 
     @Test
-    public void testGetWatchList() {
+    public void testGetList() {
         assertEquals(1,testWatchlist.watchList.size());
-        assertEquals("name", testWatchlist.watchList.get(0).getName());
+        assertEquals("name1", testWatchlist.watchList.get(0).getName());
     }
 
     @Test
-    public void testAddToWatchlistResult() {
-        assertEquals(true,testWatchlist.addToWatchlistResult("Yes"));
-        assertEquals(false,testWatchlist.addToWatchlistResult("No"));
+    public void testAddToListResult() {
+        assertTrue(testWatchlist.addToListResult("Yes"));
+        assertFalse(testWatchlist.addToListResult("No"));
     }
 
     @Test
-    public void testDeleteFromWatchlistResult() {
-        assertEquals(true, testWatchlist.deleteFromWatchlistResult("Yes"));
-        assertEquals(false, testWatchlist.deleteFromWatchlistResult("No"));
+    public void testDeleteFromListResult() {
+        assertTrue(testWatchlist.deleteFromWatchlistResult("Yes"));
+        assertFalse(testWatchlist.deleteFromWatchlistResult("No"));
     }
 
     @Test

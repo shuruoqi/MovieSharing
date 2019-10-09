@@ -17,10 +17,17 @@ public class Load implements Loadable {
         List<String> lines = Files.readAllLines(Paths.get(textfile));
         for (String line : lines) {
             ArrayList<String> partsOfLine = splitOnSpace(line);
-            Movie m = new Movie(partsOfLine.get(0),
-                    Integer.parseInt(partsOfLine.get(1)),
-                    Integer.parseInt(partsOfLine.get(2)));
-            movies.add(m);
+            if (partsOfLine.get(1).equals("regular")) {
+                Movie m = new RegularMovie(partsOfLine.get(0),
+                        (partsOfLine.get(2)),
+                        Double.parseDouble(partsOfLine.get(3)));
+                movies.add(m);
+            } else {
+                Movie m = new VipMovie(partsOfLine.get(0),
+                        (partsOfLine.get(2)),
+                        Double.parseDouble(partsOfLine.get(3)));
+                movies.add(m);
+            }
         }
         return movies;
     }

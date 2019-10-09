@@ -1,63 +1,48 @@
 package ui;
 
 import model.Movie;
+import model.Movielist;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Watchlist {
+public class Watchlist extends Movielist {
     public ArrayList<Movie> watchList;
     Scanner scanner;
     boolean chooseMovieLoopState = true;
     boolean deleteMovieLoopState = true;
 
+    @Override
     //EFFECTS: construct a new watchList
-    public void watchListSetUp() {
+    public void listSetUp() {
         watchList = new ArrayList<Movie>();
     }
 
-    //EFFECTS: return the watchlist
-    public ArrayList<Movie> getWatchList() {
+    @Override
+    public ArrayList<Movie> getList() {
         return watchList;
     }
 
-    //EFFECTS: print out all the information of the given movie
-    public void printAll(Movie m) {
-        System.out.println("Movie name:" + m.getName());
-        System.out.println("Price:" + m.getPrice());
-        System.out.println("Show time:" + m.getShowTime());
+    @Override
+    public void startScannerQ() {
     }
 
-    //EFFECTS: asking for user input for movie choice,
-    //         return the user input string
-    public String chooseMovieScanner() {
-        scanner = new Scanner(System.in);
+    @Override
+    public void chooseMovieScannerQ() {
         System.out.println("Which movie would you like to watch?");
-        return scanner.nextLine();
     }
 
-    //EFFECTS: asking for user input for whether adding to the watchlist,
-    //         return the user input string
-    public String addToWatchlistScanner() {
-        scanner = new Scanner(System.in);
+    @Override
+    public void addToListScannerQ() {
         System.out.println("Add to the watchlist? [Yes] [No]");
-        return scanner.nextLine();
     }
 
-    //EFFECTS: if entering "Yes", then return true. Otherwise, return false
-    public Boolean addToWatchlistResult(String choice) {
-        if (choice.equals("Yes")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public String continueToChooseMovieScanner() {
-        scanner = new Scanner(System.in);
+    @Override
+    public void continueToChooseMovieScannerQ() {
         System.out.println("Continue to choose movie? [Yes] [No]");
-        return scanner.nextLine();
     }
 
+    @Override
     public Boolean continueToChooseMovieResult(String choice) {
         if (choice.equals("Yes")) {
             return chooseMovieLoopState = true;
@@ -66,22 +51,9 @@ public class Watchlist {
         }
     }
 
-    //EFFECTS: add the given movie to watchlist if it is not already in it
-    public void insertMovieToWatchlist(Movie movie) {
-        if (checkRepetition(movie)) {
-            System.out.println("Already in the watchlist.");
-        } else {
-            watchList.add(movie);
-        }
-    }
-
-    public boolean checkRepetition(Movie movie) {
-        for (Movie next : watchList) {
-            if (movie.getName().equals(next.getName())) {
-                return true;
-            }
-        }
-        return false;
+    @Override
+    public void printAlready() {
+        System.out.println("Already in the watchlist.");
     }
 
     //EFFECTS: asking for user input for deleting movie choice,
@@ -122,5 +94,4 @@ public class Watchlist {
             return deleteMovieLoopState = false;
         }
     }
-
 }

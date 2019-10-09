@@ -1,16 +1,16 @@
 package model;
 
-public class Movie {
+public abstract class Movie {
     private String name; //field
-    private int showTime;
-    private int price;
+    private String quality;
+    private double size;
 
     //MODIFIES: this
-    //EFFECTS: initialize a movie that has name, showtime and price
-    public Movie(String name, int showTime, int price) { //Constructor
+    //EFFECTS: initialize a movie that has name, showtime and size
+    public Movie(String name, String quality, double size) { //Constructor
         this.name = name;
-        this.showTime = showTime;
-        this.price = price;
+        this.quality = quality;
+        this.size = size;
     }
 
     //MODIFIES: this
@@ -24,25 +24,27 @@ public class Movie {
         return name;
     }
 
+    public abstract String getType();
+
     //MODIFIES: this
     //EFFECTS: change the price of the movie to the given parameter name
-    public void setPrice(int price) {
-        this.price = price;
+    public void setSize(double size) {
+        this.size = size;
     }
 
     //EFFECTS: return the price of the movie
-    public int getPrice() {
-        return price;
+    public double getSize() {
+        return size;
     }
 
     //MODIFIES: this
     //EFFECTS: change the showtime of the movie to the given parameter name
-    public void setShowTime(int showTime) {
-        this.showTime = showTime;
+    public void setQuality(String quality) {
+        this.quality = quality;
     }
 
     //EFFECTS: return the showtime of the movie
-    public int getShowTime() {
-        return showTime;
+    public String getQuality() {
+        return quality;
     }
 }
