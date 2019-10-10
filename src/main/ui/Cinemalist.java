@@ -1,4 +1,6 @@
-package model;
+package ui;
+
+import model.*;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-import model.Cinemalist;
+import ui.Cinemalist;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;

@@ -1,6 +1,8 @@
 package ui;
 
 import model.CLOperation;
+import model.DLOperation;
+import model.WLOperation;
 
 import java.io.IOException;
 
@@ -12,7 +14,6 @@ public class Main {
         CLOperation cloperation = new CLOperation();
         System.out.println("Welcome!");
         cloperation.operationSetUp();
-        cloperation.start();
         cloperation.chooseMovieLoop();
         wloperation.operationSetUp();
         wloperation.start();

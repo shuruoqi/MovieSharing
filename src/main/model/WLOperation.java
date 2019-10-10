@@ -1,6 +1,8 @@
-package ui;
+package model;
 
 import model.*;
+import ui.Cinemalist;
+import ui.Watchlist;
 
 import java.io.IOException;
 import java.util.ArrayList;

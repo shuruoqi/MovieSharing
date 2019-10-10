@@ -1,7 +1,6 @@
 package ui;
 
 import model.Movie;
-import model.Movielist;
 import model.RegularMovie;
 import model.VipMovie;
 

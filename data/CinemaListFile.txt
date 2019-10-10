@@ -3,3 +3,4 @@ Spiderman,regular,1080p,1.5
 Ironman,VIP,720p,0.75
 Captain America,regular,720p,0.8
 Avengers,VIP,1080p,2.2
+Doctor Strange,VIP,720p,1.1

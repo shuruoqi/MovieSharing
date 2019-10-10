@@ -1,7 +1,6 @@
 package ui;
 
 import model.Movie;
-import model.Movielist;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,8 +8,8 @@ import java.util.Scanner;
 public class Watchlist extends Movielist {
     public ArrayList<Movie> watchList;
     Scanner scanner;
-    boolean chooseMovieLoopState = true;
-    boolean deleteMovieLoopState = true;
+    public boolean chooseMovieLoopState = true;
+    public boolean deleteMovieLoopState = true;
 
     @Override
     //EFFECTS: construct a new watchList

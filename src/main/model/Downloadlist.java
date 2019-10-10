@@ -1,9 +1,9 @@
-package ui;
+package model;
 
 import model.Movie;
-import model.Movielist;
+import ui.Movielist;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Downloadlist extends Movielist {
     public ArrayList<Movie> downloadList;

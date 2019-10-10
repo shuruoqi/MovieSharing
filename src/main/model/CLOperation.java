@@ -1,9 +1,11 @@
 package model;
 
+import ui.Cinemalist;
+
 import java.io.IOException;
 
 public class CLOperation {
-    Cinemalist cinemalist;
+    public Cinemalist cinemalist;
     Loadable loadCL;
     Saveable saveCL;
 
@@ -11,17 +13,6 @@ public class CLOperation {
         cinemalist = new Cinemalist();
         cinemalist.listSetUp();
     }
-
-    public void start() throws IOException {
-        loadCL = new Load();
-        cinemalist.cinemaList = loadCL.load("./data/CinemaListFile.txt");
-    }
-
-
-    public void chooseType() {
-        cinemalist.chooseTypeResult(cinemalist.chooseTypeScanner());
-    }
-
 
     public void continueToChooseMovie() {
         cinemalist.continueToChooseMovieResult(cinemalist.continueToChooseMovieScanner());

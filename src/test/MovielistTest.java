@@ -1,15 +1,13 @@
-import model.Movie;
-import model.Movielist;
+import ui.Movielist;
 import model.RegularMovie;
 import model.VipMovie;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ui.Downloadlist;
+import model.Downloadlist;
 import ui.Upload;
 import ui.Watchlist;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
