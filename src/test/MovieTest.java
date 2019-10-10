@@ -1,5 +1,5 @@
 import model.Movie;
-import model.RegularMovie;
+import model.PublicMovie;
 import model.VipMovie;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,8 +12,14 @@ public class MovieTest {
 
     @BeforeEach
     public void setUp() {
-        testRegular = new RegularMovie("Regular", "720p", 1);
-        testVip = new VipMovie("VIP", "1080p", 2);
+        testRegular = new PublicMovie();
+        testRegular.setName("Regular");
+        testRegular.setQuality("720p");
+        testRegular.setSize(1);
+        testVip = new VipMovie();
+        testVip.setName("VIP");
+        testVip.setQuality("1080p");
+        testVip.setSize(2);
     }
 
     @Test

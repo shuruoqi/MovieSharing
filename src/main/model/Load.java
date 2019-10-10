@@ -12,24 +12,30 @@ public class Load implements Loadable {
 
     public ArrayList<Movie> movies;
 
-    public ArrayList<Movie> load(String textfile) throws IOException {
+    public ArrayList<Movie> load(String textFile) throws IOException {
         movies = new ArrayList<>();
-        List<String> lines = Files.readAllLines(Paths.get(textfile));
+        List<String> lines = Files.readAllLines(Paths.get(textFile));
         for (String line : lines) {
             ArrayList<String> partsOfLine = splitOnSpace(line);
-            if (partsOfLine.get(1).equals("regular")) {
-                Movie m = new RegularMovie(partsOfLine.get(0),
-                        (partsOfLine.get(2)),
-                        Double.parseDouble(partsOfLine.get(3)));
+            if (partsOfLine.get(1).equals("Public")) {
+                Movie m = new PublicMovie();
+
+                set(partsOfLine, m);
                 movies.add(m);
             } else {
-                Movie m = new VipMovie(partsOfLine.get(0),
-                        (partsOfLine.get(2)),
-                        Double.parseDouble(partsOfLine.get(3)));
+                Movie m = new VipMovie();
+
+                set(partsOfLine, m);
                 movies.add(m);
             }
         }
         return movies;
+    }
+
+    public void set(ArrayList<String> partsOfLine, Movie m) {
+        m.setName(partsOfLine.get(0));
+        m.setQuality(partsOfLine.get(2));
+        m.setSize(Double.parseDouble(partsOfLine.get(3)));
     }
 
     public ArrayList<String> splitOnSpace(String line) {

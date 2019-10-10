@@ -9,7 +9,11 @@ public class VipMovieTest {
 
     @BeforeEach
     public void setUp(){
-        testMovie = new VipMovie("name","1080p",2);
+        testMovie = new VipMovie();
+
+        testMovie.setName("name");
+        testMovie.setQuality("1080p");
+        testMovie.setSize(2);
     }
 
     @Test

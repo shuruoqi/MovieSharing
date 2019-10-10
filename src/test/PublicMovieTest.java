@@ -1,15 +1,19 @@
-import model.RegularMovie;
+import model.PublicMovie;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RegularMovieTest {
-    RegularMovie testMovie;
+public class PublicMovieTest {
+    PublicMovie testMovie;
 
     @BeforeEach
     public void setUp(){
-        testMovie = new RegularMovie("name","1080p",2);
+        testMovie = new PublicMovie();
+
+        testMovie.setName("name");
+        testMovie.setQuality("1080p");
+        testMovie.setSize(2);
     }
 
     @Test
@@ -26,7 +30,7 @@ public class RegularMovieTest {
 
     @Test
     public void testGetType() {
-        assertEquals("regular",testMovie.getType());
+        assertEquals("Public",testMovie.getType());
     }
 
     @Test

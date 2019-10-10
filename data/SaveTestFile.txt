@@ -1,2 +1,2 @@
-Movie1,regular,720p,1.0
+Movie1,Public,720p,1.0
 Movie2,VIP,1080p,2.0

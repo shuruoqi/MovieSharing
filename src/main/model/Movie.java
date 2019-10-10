@@ -5,12 +5,10 @@ public abstract class Movie {
     private String quality;
     private double size;
 
-    //MODIFIES: this
-    //EFFECTS: initialize a movie that has name, showtime and size
-    public Movie(String name, String quality, double size) { //Constructor
-        this.name = name;
-        this.quality = quality;
-        this.size = size;
+    //EFFECTS: print out all the information of the given movie
+    public void printInfo() {
+        System.out.println("Movie name:" + getName()
+                + "---Quality:" + getQuality() + "---Size:" + getSize());
     }
 
     //MODIFIES: this

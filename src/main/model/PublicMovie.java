@@ -1,9 +1,10 @@
 package model;
 
-public class VipMovie extends Movie {
+public class PublicMovie extends Movie {
 
     @Override
     public String getType() {
-        return "VIP";
+        return "Public";
     }
+
 }
