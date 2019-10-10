@@ -3,7 +3,7 @@ import model.RegularMovie;
 import model.VipMovie;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import model.Downloadlist;
+import ui.Downloadlist;
 import ui.Upload;
 import ui.Watchlist;
 

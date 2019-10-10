@@ -1,10 +1,8 @@
-import model.Downloadlist;
+import ui.Downloadlist;
 import model.Movie;
-import model.RegularMovie;
 import model.VipMovie;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ui.Watchlist;
 
 import static org.junit.jupiter.api.Assertions.*;
 

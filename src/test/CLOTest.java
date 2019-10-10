@@ -1,4 +1,3 @@
-import model.CLOperation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ui.Cinemalist;
@@ -8,11 +7,11 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CLOTest {
-    CLOperation testCLO;
+    Cinemalist.CLOperation testCLO;
 
     @BeforeEach
     public void setUp() {
-        testCLO = new CLOperation();
+        testCLO = new Cinemalist.CLOperation();
     }
 
     @Test

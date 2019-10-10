@@ -1,17 +1,13 @@
 package ui;
 
-import model.CLOperation;
-import model.DLOperation;
-import model.WLOperation;
-
 import java.io.IOException;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        WLOperation wloperation = new WLOperation();
-        DLOperation dloperation = new DLOperation();
-        CLOperation cloperation = new CLOperation();
+        Watchlist.WLOperation wloperation = new Watchlist.WLOperation();
+        Downloadlist.DLOperation dloperation = new Downloadlist.DLOperation();
+        Cinemalist.CLOperation cloperation = new Cinemalist.CLOperation();
         System.out.println("Welcome!");
         cloperation.operationSetUp();
         cloperation.chooseMovieLoop();
