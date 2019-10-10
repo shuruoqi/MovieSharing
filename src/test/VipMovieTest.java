@@ -1,4 +1,3 @@
-import model.RegularMovie;
 import model.VipMovie;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,5 @@
-package ui;
+package model;
 
-import model.*;
 import java.io.IOException;
 
 public class CLOperation {

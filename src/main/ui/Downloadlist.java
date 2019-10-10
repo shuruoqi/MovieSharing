@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Downloadlist extends Movielist {
     public ArrayList<Movie> downloadList;
     boolean downloadMovieLoopState = true;
-    Scanner scanner;
 
     @Override
     public void listSetUp() {

@@ -5,6 +5,7 @@ public class VipMovie extends Movie {
 
     public VipMovie(String name, String quality, double size) {
         super(name, quality, size);
+        type = "VIP";
     }
 
     @Override

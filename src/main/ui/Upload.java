@@ -8,7 +8,7 @@ import model.VipMovie;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Uploadlist extends Movielist {
+public class Upload extends Movielist {
     public ArrayList<Movie> uploadList;
     boolean uploadMovieLoopState = true;
     Scanner scanner;
@@ -30,7 +30,7 @@ public class Uploadlist extends Movielist {
 
     public String chooseTypeScanner() {
         scanner = new Scanner(System.in);
-        System.out.println("Please define the type of the movie");
+        System.out.println("Please define the type of the movie. [regular] [VIP]");
         return scanner.nextLine();
     }
 
