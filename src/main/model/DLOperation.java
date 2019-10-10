@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class DLOperation {
-    Downloadlist downloadlist;
+    public Downloadlist downloadlist;
     WLOperation wlOperation;
     Watchlist watchlist;
     Loadable loadDL;
