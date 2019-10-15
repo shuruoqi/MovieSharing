@@ -1,5 +1,7 @@
 package ui;
 
+import exception.ReputationException;
+import exception.VipException;
 import model.*;
 
 import java.io.IOException;
@@ -12,7 +14,7 @@ public class CinemaList extends MovieList {
     private Scanner scanner;
     private String type;
 
-    void upload() {
+    void upload() throws ReputationException, VipException {
         identifyType();
         enterInfo();
         add(movie);

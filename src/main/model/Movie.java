@@ -8,7 +8,7 @@ public abstract class Movie {
     //EFFECTS: print out all the information of the given movie
     public void printInfo() {
         System.out.println("Movie name:" + getName()
-                + "---Quality:" + getQuality() + "---Size:" + getSize());
+                + "   Quality:" + getQuality() + "   Size:" + getSize());
     }
 
     //MODIFIES: this

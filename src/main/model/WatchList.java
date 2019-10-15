@@ -1,6 +1,7 @@
-package ui;
+package model;
 
-import model.*;
+import ui.Loadable;
+import ui.Savable;
 
 import java.io.IOException;
 import java.util.ArrayList;

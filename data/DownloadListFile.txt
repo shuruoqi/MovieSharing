@@ -1,3 +1,2 @@
 Thor,Public,1080p,2.1
 Spiderman,Public,1080p,1.5
-Avengers,VIP,1080p,2.2

@@ -1,11 +1,13 @@
+import exception.ReputationException;
+import exception.VipException;
 import model.Movie;
 import model.PublicMovie;
 import model.Save;
 import model.VipMovie;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ui.MovieList;
-import ui.WatchList;
+import model.MovieList;
+import model.WatchList;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,7 +23,7 @@ public class SaveTest {
     MovieList testWatchList;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() throws ReputationException, VipException {
         testSave = new Save();
         testMovie1 = new PublicMovie();
         testWatchList = new WatchList();

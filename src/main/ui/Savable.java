@@ -1,4 +1,6 @@
-package model;
+package ui;
+
+import model.Movie;
 
 import java.io.IOException;
 import java.util.ArrayList;

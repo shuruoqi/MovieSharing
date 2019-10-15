@@ -1,10 +1,11 @@
-package ui;
+package model;
 
+import exception.ReputationException;
+import exception.VipException;
 import model.Movie;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public abstract class MovieList {
     public ArrayList<Movie> movies;
@@ -19,17 +20,17 @@ public abstract class MovieList {
 
     public abstract ArrayList<Movie> getList();
 
-    void delete(String name) {
-        Movie temp = null;
+    public void delete(String name) {
+        Movie toBeRemoved = null;
         for (Movie m : movies) {
             if (m.getName().equals(name)) {
-                temp = m;
+                toBeRemoved = m;
             }
         }
-        movies.remove(temp);
+        movies.remove(toBeRemoved);
     }
 
-    Movie getMovie(String name) {
+    public Movie getMovie(String name) {
         for (Movie m : movies) {
             if (m.getName().equals(name)) {
                 return m;
@@ -44,9 +45,9 @@ public abstract class MovieList {
         }
     }
 
-    public void add(Movie movie) {
+    public void add(Movie movie) throws ReputationException, VipException {
         if (checkRepetition(movie)) {
-            printAlready();
+            throw new ReputationException();
         } else {
             movies.add(movie);
         }

@@ -1,7 +1,10 @@
 package ui;
 
+import exception.ReputationException;
+import exception.VipException;
 import model.DownloadList;
 import model.Movie;
+import model.WatchList;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -12,10 +15,10 @@ public class Menu {
     CinemaList cinemaList;
     Scanner scanner;
     int choice;
-    boolean cycle;
+    boolean loopState;
 
-    void start() throws IOException {
-        cycle = true;
+    void start() throws IOException, ReputationException, VipException {
+        loopState = true;
         cinemaList = new CinemaList();
         watchList = new WatchList();
         downloadList = new DownloadList();
@@ -25,10 +28,10 @@ public class Menu {
         downloadList.load();
 
         System.out.println("Welcome!");
-        while (cycle) {
+        while (loopState) {
             scanner = new Scanner(System.in);
 
-            cycle = loop();
+            loopState = loop();
         }
         cinemaList.save();
         watchList.save();
@@ -37,7 +40,6 @@ public class Menu {
     }
 
     private void printChoices() {
-        System.out.println("Please select one.");
         System.out.println("[1] check watchlist");
         System.out.println("[2] add to watchlist");
         System.out.println("[3] delete from watchlist");
@@ -46,7 +48,7 @@ public class Menu {
         System.out.println("[6] exit");
     }
 
-    private boolean loop() {
+    private boolean loop() throws ReputationException, VipException {
         printChoices();
         choice = Integer.parseInt(scanner.nextLine());
 
@@ -68,12 +70,16 @@ public class Menu {
     }
 
     private void add() {
-        System.out.println("Which movie would you like to watch?");
-        String name = scanner.nextLine();
-        Movie movie = cinemaList.getMovie(name);
-        watchList.add(movie);
-        movie.printInfo();
-        System.out.println("Add successfully");
+        try {
+            System.out.println("Which movie would you like to watch?");
+            String name = scanner.nextLine();
+            Movie movie = cinemaList.getMovie(name);
+            watchList.add(movie);
+            movie.printInfo();
+            System.out.println("Add successfully");
+        } catch (ReputationException | VipException e) {
+            watchList.printAlready();
+        }
     }
 
     private void delete() {
@@ -85,14 +91,20 @@ public class Menu {
     }
 
     private void download() {
-        System.out.println("Which movie would you like to download?");
-        watchList.showAll();
-        String name = scanner.nextLine();
-        Movie movie = watchList.getMovie(name);
-        downloadList.add(movie);
-        downloadList.showAll();
-        System.out.println("Movies download successfully");
+        try {
+            System.out.println("Which movie would you like to download?");
+            watchList.showAll();
+            String name = scanner.nextLine();
+            Movie movie = watchList.getMovie(name);
+            downloadList.add(movie);
+            downloadList.showAll();
+            System.out.println("Movies download successfully");
+        } catch (ReputationException e) {
+            downloadList.printAlready();
+        } catch (VipException e) {
+            System.out.println("VIP movies are not downloadable, but they are accessible online.");
+        } finally {
+            System.out.println("Enjoy the movie!");
+        }
     }
-
-
 }

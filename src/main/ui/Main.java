@@ -1,15 +1,14 @@
 package ui;
 
+import exception.ReputationException;
+import exception.VipException;
+
 import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ReputationException, VipException {
         Menu menu = new Menu();
-        CinemaList cinemaList = new CinemaList();
-
-        cinemaList.load();
-        cinemaList.showAll();
         menu.start();
     }
 }
