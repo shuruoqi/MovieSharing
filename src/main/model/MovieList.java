@@ -2,13 +2,14 @@ package model;
 
 import exception.ReputationException;
 import exception.VipException;
-import model.Movie;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public abstract class MovieList {
     public ArrayList<Movie> movies;
+    public Load load = new Load();
+    public Save save = new Save();
 
     public MovieList() {
         movies = new ArrayList<>();

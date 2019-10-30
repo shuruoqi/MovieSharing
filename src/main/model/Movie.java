@@ -1,14 +1,19 @@
 package model;
 
+import java.util.ArrayList;
+
 public abstract class Movie {
     private String name; //field
     private String quality;
     private double size;
+    private ArrayList<Genre> genres = new ArrayList<>();
+
 
     //EFFECTS: print out all the information of the given movie
     public void printInfo() {
-        System.out.println("Movie name:" + getName()
-                + "   Quality:" + getQuality() + "   Size:" + getSize());
+        System.out.print("Movie name:" + getName()
+                + "   Quality:" + getQuality() + "   Size:" + getSize() + "   Genres:");
+        printAllGenres();
     }
 
     //MODIFIES: this
@@ -44,5 +49,31 @@ public abstract class Movie {
     //EFFECTS: return the showtime of the movie
     public String getQuality() {
         return quality;
+    }
+
+    public void addGenre(Genre genre) {
+        if (!this.genres.contains(genre)) {
+            genres.add(genre);
+            genre.addMovie(this);
+        }
+    }
+
+    public ArrayList<Genre> getGenres() {
+        return genres;
+    }
+
+    public String getAllGenresName() {
+        String nameLine = "";
+        for (Genre genre : genres) {
+            nameLine += genre.getName() + " ";
+        }
+        return nameLine.substring(0, nameLine.length() - 1);
+
+    }
+
+    public void printAllGenres() {
+        for (Genre genre : genres) {
+            System.out.print(genre.getName());
+        }
     }
 }

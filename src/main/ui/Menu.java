@@ -45,13 +45,17 @@ public class Menu {
         System.out.println("[3] delete from watchlist");
         System.out.println("[4] download");
         System.out.println("[5] upload");
-        System.out.println("[6] exit");
+        System.out.println("[6] Movie Genres");
+        System.out.println("[7] exit");
     }
 
     private boolean loop() throws ReputationException, VipException {
         printChoices();
         choice = Integer.parseInt(scanner.nextLine());
+        return evaluate(choice);
+    }
 
+    private boolean evaluate(int choice) throws ReputationException, VipException {
         if (choice == 1) {
             watchList.showAll();
         } else if (choice == 2) {
@@ -63,6 +67,8 @@ public class Menu {
         } else if (choice == 5) {
             cinemaList.upload();
         } else if (choice == 6) {
+            printMoviesOfGivenGenre();
+        } else if (choice == 7) {
             System.out.println("See you!");
             return false;
         }
@@ -105,6 +111,15 @@ public class Menu {
             System.out.println("VIP movies are not downloadable, but they are accessible online.");
         } finally {
             System.out.println("Enjoy the movie!");
+        }
+    }
+
+    private void printMoviesOfGivenGenre() {
+        String genreChoice = "";
+        System.out.println("Which movie Genre would you like to Choose?");
+        genreChoice = scanner.nextLine();
+        for (Movie movie : cinemaList.genreMap.get(genreChoice)) {
+            System.out.println(movie.getName());
         }
     }
 }

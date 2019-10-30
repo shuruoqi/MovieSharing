@@ -3,7 +3,6 @@ import exception.VipException;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ui.Loadable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,7 +43,7 @@ public class DownloadListTest {
 
     @Test
     public void testLoad() throws IOException {
-        Loadable loadDL = new Load();
+        Load loadDL = new Load();
         testDownloadList.load();
         movies = loadDL.load("./data/LoadTestFile.txt");
         assertEquals("Movie1", movies.get(0).getName());

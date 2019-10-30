@@ -19,9 +19,11 @@ public class LoadTest {
         assertEquals("Public", movies.get(0).getType());
         assertEquals("1080p", movies.get(0).getQuality());
         assertEquals(1.0, movies.get(0).getSize());
+        assertEquals("Genre1 Genre2", movies.get(0).getAllGenresName());
         assertEquals("Movie2", movies.get(1).getName());
         assertEquals("VIP", movies.get(1).getType());
         assertEquals("720p", movies.get(1).getQuality());
         assertEquals(2.0, movies.get(1).getSize());
+        assertEquals("Genre1", movies.get(1).getAllGenresName());
     }
 }

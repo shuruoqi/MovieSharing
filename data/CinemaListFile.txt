@@ -1,6 +1,5 @@
-Thor,Public,1080p,2.1
-Spiderman,Public,1080p,1.5
-Ironman,VIP,720p,0.75
-Captain America,Public,720p,0.8
-Avengers,VIP,1080p,2.2
-Doctor Strange,VIP,720p,1.1
+Spiderman,Public,1080p,1.0,Action Superhero
+Ironman,VIP,1080p,2.0,Action Adventure
+Thor,Public,720p,0.9,Superhero Adventure
+Ironman,VIP,1080p,2.8,Action Adventure
+Captain America,Public,720p,0.75,Action

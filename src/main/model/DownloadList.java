@@ -2,8 +2,6 @@ package model;
 
 import exception.ReputationException;
 import exception.VipException;
-import ui.Loadable;
-import ui.Savable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,13 +20,11 @@ public class DownloadList extends MovieList {
 
     @Override
     public void load() throws IOException {
-        Loadable loadDL = new Load();
-        movies = loadDL.load("./data/DownloadListFile.txt");
+        movies = load.load("./data/DownloadListFile.txt");
     }
 
     @Override
     public void save() throws IOException {
-        Savable save = new Save();
         save.save(movies, "./data/DownloadListFile.txt");
     }
 
