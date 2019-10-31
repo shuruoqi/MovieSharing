@@ -1,3 +1,4 @@
+import model.Genre;
 import model.Movie;
 import model.PublicMovie;
 import model.VipMovie;
@@ -16,6 +17,7 @@ public class MovieTest {
         testRegular.setName("Regular");
         testRegular.setQuality("720p");
         testRegular.setSize(1);
+        testRegular.addGenre(new Genre("Genre1"));
         testVip = new VipMovie();
         testVip.setName("VIP");
         testVip.setQuality("1080p");
@@ -68,5 +70,10 @@ public class MovieTest {
     public void testGetQuality() {
         assertEquals("720p", testRegular.getQuality());
         assertEquals("1080p", testVip.getQuality());
+    }
+
+    @Test
+    public void testPrintAllGenres() {
+
     }
 }

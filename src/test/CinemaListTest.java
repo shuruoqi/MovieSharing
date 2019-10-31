@@ -19,7 +19,7 @@ public class CinemaListTest {
     @Test
     public void testGetList() {
         assertEquals("Spiderman", testCinemaList.getList().get(0).getName());
-        assertEquals("Ironman", testCinemaList.getList().get(1).getName());
+        assertEquals("Thor", testCinemaList.getList().get(1).getName());
 
     }
 }

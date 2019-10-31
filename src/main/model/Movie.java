@@ -11,9 +11,8 @@ public abstract class Movie {
 
     //EFFECTS: print out all the information of the given movie
     public void printInfo() {
-        System.out.print("Movie name:" + getName()
-                + "   Quality:" + getQuality() + "   Size:" + getSize() + "   Genres:");
-        printAllGenres();
+        System.out.println("Movie name:" + getName()
+                + "   Quality:" + getQuality() + "   Size:" + getSize() + "   Genres:" + getAllGenresName());
     }
 
     //MODIFIES: this
@@ -69,11 +68,5 @@ public abstract class Movie {
         }
         return nameLine.substring(0, nameLine.length() - 1);
 
-    }
-
-    public void printAllGenres() {
-        for (Genre genre : genres) {
-            System.out.print(genre.getName());
-        }
     }
 }

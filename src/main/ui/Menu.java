@@ -3,6 +3,7 @@ package ui;
 import exception.ReputationException;
 import exception.VipException;
 import model.DownloadList;
+import model.Genre;
 import model.Movie;
 import model.WatchList;
 
@@ -49,13 +50,13 @@ public class Menu {
         System.out.println("[7] exit");
     }
 
-    private boolean loop() throws ReputationException, VipException {
+    private boolean loop() {
         printChoices();
         choice = Integer.parseInt(scanner.nextLine());
         return evaluate(choice);
     }
 
-    private boolean evaluate(int choice) throws ReputationException, VipException {
+    private boolean evaluate(int choice) {
         if (choice == 1) {
             watchList.showAll();
         } else if (choice == 2) {
@@ -115,11 +116,14 @@ public class Menu {
     }
 
     private void printMoviesOfGivenGenre() {
-        String genreChoice = "";
-        System.out.println("Which movie Genre would you like to Choose?");
-        genreChoice = scanner.nextLine();
-        for (Movie movie : cinemaList.genreMap.get(genreChoice)) {
-            System.out.println(movie.getName());
+        System.out.println("Which movie Genre would you like to choose?");
+        String genreName = scanner.nextLine();
+        for (Genre genre : cinemaList.genreMap.keySet()) {
+            if (genre.equals(new Genre(genreName))) {
+                for (Movie movie : genre.getMovies()) {
+                    System.out.print(movie.getName() + " ");
+                }
+            }
         }
     }
 }

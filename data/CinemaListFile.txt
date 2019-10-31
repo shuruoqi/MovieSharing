@@ -1,5 +1,8 @@
 Spiderman,Public,1080p,1.0,Action Superhero
-Ironman,VIP,1080p,2.0,Action Adventure
 Thor,Public,720p,0.9,Superhero Adventure
 Ironman,VIP,1080p,2.8,Action Adventure
 Captain America,Public,720p,0.75,Action
+Avengers,VIP,1080p,3.2,Action
+Lucy,Public,720p,0.75,ScienceFiction Action
+The Lion King,Public,720p,1.0,Animation Drama Adventure
+Transformers,VIP,1080p,2.33,Action Adventure ScienceFiction

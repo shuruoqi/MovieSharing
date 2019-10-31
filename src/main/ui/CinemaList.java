@@ -14,13 +14,17 @@ public class CinemaList extends MovieList {
     private String choice;
     private Scanner scanner;
     private String type;
-    public HashMap<String, ArrayList<Movie>> genreMap = new HashMap<>();
+    public HashMap<Genre, ArrayList<Movie>> genreMap = new HashMap<>();
 
-    void upload() throws ReputationException, VipException {
-        identifyType();
-        enterInfo();
-        add(movie);
-        System.out.println("Upload successfully!");
+    void upload() {
+        try {
+            identifyType();
+            enterInfo();
+            add(movie);
+            System.out.println("Upload successfully!");
+        } catch (ReputationException | VipException e) {
+            printAlready();
+        }
     }
 
     private void enterInfo() {
@@ -28,7 +32,7 @@ public class CinemaList extends MovieList {
         enterQuality();
         enterSize();
         enterGenre();
-        updateGenreMap(movie);
+        updateMap(movie);
     }
 
     private void enterName() {
@@ -54,40 +58,31 @@ public class CinemaList extends MovieList {
     }
 
     private void enterGenre() {
-        String choice;
         scanner = new Scanner(System.in);
         System.out.print("Enter the first genre:");
         choice = scanner.nextLine();
         movie.addGenre(new Genre(choice));
-        String decision = "";
         scanner = new Scanner(System.in);
         System.out.print("[1] continue entering genre");
         System.out.print("[2] exit entering genre");
-        decision = scanner.nextLine();
-        if (Integer.parseInt(decision) == 1) {
+        String decision = scanner.nextLine();
+        while (Integer.parseInt(decision) == 1) {
             System.out.print("Enter the next genre:");
-            updateGenre();
+            choice = scanner.nextLine();
+            movie.addGenre(new Genre(choice));
+            System.out.print("[1] continue entering genre");
+            System.out.print("[2] exit entering genre");
+            decision = scanner.nextLine();
         }
     }
 
-    public void updateGenre() {
-        choice = scanner.nextLine();
+    private void updateMap(Movie movie) {
         for (Genre genre : movie.getGenres()) {
-            if (genre.equals(new Genre(choice))) {
-                System.out.println("This genre has already been added.");
-            } else {
-                movie.addGenre(new Genre(choice));
-            }
-        }
-    }
-
-    private void updateGenreMap(Movie movie) {
-        for (Genre genre : movie.getGenres()) {
-            if (genreMap.containsKey(genre.getName())) {
-                ArrayList<Movie> originalList = genreMap.get(genre.getName());
+            if (genreMap.containsKey(genre)) {
+                ArrayList<Movie> originalList = genreMap.get(genre);
                 originalList.add(movie);
             } else {
-                genreMap.put(genre.getName(), genre.getMovies());
+                genreMap.put(genre, genre.getMovies());
             }
         }
     }
@@ -112,7 +107,7 @@ public class CinemaList extends MovieList {
     public void load() throws IOException {
         movies = load.load("./data/CinemaListFile.txt");
         for (Movie movie : movies) {
-            updateGenreMap(movie);
+            updateMap(movie);
         }
     }
 
