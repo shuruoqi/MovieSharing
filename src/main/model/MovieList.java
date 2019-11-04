@@ -2,7 +2,6 @@ package model;
 
 import exception.ReputationException;
 import exception.VipException;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
