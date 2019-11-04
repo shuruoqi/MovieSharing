@@ -122,6 +122,7 @@ public class CinemaList extends MovieList {
             updateMap(movie);
         }
     }
+
     @Override
     public void save() throws IOException {
         save.save(movies, "./data/CinemaListFile.txt");
