@@ -2,9 +2,8 @@ package model;
 
 import exception.ReputationException;
 import exception.VipException;
-
+import ui.CinemaList;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class DownloadList extends MovieList {
 
@@ -18,6 +17,20 @@ public class DownloadList extends MovieList {
         }
     }
 
+    public void download() throws IOException {
+        String operation = "download";
+        CinemaList cinemaList = new CinemaList();
+        try {
+            cinemaList.helper(this, operation);
+        } catch (ReputationException e) {
+            printAlready(operation);
+        } catch (VipException e) {
+            System.out.println("VIP movies are not downloadable, but they are accessible online.");
+        } finally {
+            System.out.println("Enjoy the movie!");
+        }
+    }
+
     @Override
     public void load() throws IOException {
         movies = load.load("./data/DownloadListFile.txt");
@@ -26,15 +39,5 @@ public class DownloadList extends MovieList {
     @Override
     public void save() throws IOException {
         save.save(movies, "./data/DownloadListFile.txt");
-    }
-
-    @Override
-    public ArrayList<Movie> getList() {
-        return movies;
-    }
-
-    @Override
-    public void printAlready() {
-        System.out.println("Already downloaded.");
     }
 }
