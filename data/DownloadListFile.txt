@@ -1,1 +1,4 @@
 Spiderman,Public,1080p,1.0,Action Superhero
+Thor,Public,720p,0.9,Superhero Adventure
+Lucy,Public,720p,0.75,ScienceFiction Action
+The Lion King,Public,720p,1.0,Animation Drama Adventure

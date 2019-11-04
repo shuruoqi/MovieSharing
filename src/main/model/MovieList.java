@@ -19,7 +19,9 @@ public abstract class MovieList {
 
     public abstract void save() throws IOException;
 
-    public abstract ArrayList<Movie> getList();
+    public ArrayList<Movie> getList() {
+        return movies;
+    }
 
     public void delete(String name) {
         Movie toBeRemoved = null;
@@ -54,7 +56,9 @@ public abstract class MovieList {
         }
     }
 
-    public abstract void printAlready();
+    public void printAlready(String operation) {
+        System.out.println("Already " + operation + "ed!");
+    }
 
     public boolean checkRepetition(Movie movie) {
         for (Movie next : getList()) {
