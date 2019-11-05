@@ -7,3 +7,4 @@ Lucy,Public,720p,0.75,ScienceFiction Action
 The Lion King,Public,720p,1.0,Animation Drama Adventure
 Transformers,VIP,1080p,2.33,Action Adventure ScienceFiction
 Black Panther,Public,720p,1.15,Action Adventure Superhero
+Captain Marvel,Public,1080p,1.23,ScienceFiction Action Adventure
