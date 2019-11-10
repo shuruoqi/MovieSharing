@@ -24,19 +24,29 @@ public class ListOperation {
         watchList = new WatchList();
         downloadList = new DownloadList();
         scanner = new Scanner(System.in);
+        User alice = new User("Alice");
+        User bob = new User("Bob");
 
-        cinemaList.load();
-        watchList.load();
-        downloadList.load();
-
+        cinemaList.addObserver(alice);
+        cinemaList.addObserver(bob);
+        loadAll();
         System.out.println("Welcome!");
         while (loopState) {
             loopState = loop();
         }
+        saveAll();
+    }
+
+    private void loadAll() throws IOException {
+        cinemaList.load();
+        watchList.load();
+        downloadList.load();
+    }
+
+    private void saveAll() throws IOException {
         cinemaList.save();
         watchList.save();
         downloadList.save();
-
     }
 
     private boolean loop() {

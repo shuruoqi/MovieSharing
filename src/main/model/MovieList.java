@@ -5,7 +5,7 @@ import exception.VipException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public abstract class MovieList {
+public abstract class MovieList extends Subject {
     public ArrayList<Movie> movies;
     public Load load = new Load();
     public Save save = new Save();
@@ -52,6 +52,7 @@ public abstract class MovieList {
             throw new ReputationException();
         } else {
             movies.add(movie);
+            notifyObservers(movie);
         }
     }
 
