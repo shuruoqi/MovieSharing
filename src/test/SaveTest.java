@@ -28,13 +28,13 @@ public class SaveTest {
         testGenre2 = new Genre("Genre2");
 
         testMovie1.setName("Movie1");
-        testMovie1.setDate(2001);
+        testMovie1.setDate("2001-01-01");
         testMovie1.addGenre(testGenre1);
         testMovie1.addGenre(testGenre2);
 
         testMovie2 = new UpcomingMovie();
         testMovie2.setName("Movie2");
-        testMovie2.setDate(2002);
+        testMovie2.setDate("2002-02-02");
         testMovie2.addGenre(testGenre1);
         testWatchList.add(testMovie1);
         testWatchList.add(testMovie2);
@@ -45,8 +45,8 @@ public class SaveTest {
     public void testSave() throws IOException {
         testSave.save(testWatchList.getList(),"./data/SaveTestFile.txt");
         List<String> lines = Files.readAllLines(Paths.get("./data/SaveTestFile.txt"));
-        assertEquals("Movie1,Public,2001,Genre1 Genre2",lines.get(0));
-        assertEquals("Movie2,Upcoming,2002,Genre1",lines.get(1));
+        assertEquals("Movie1,Public,2001-01-01,Genre1 Genre2",lines.get(0));
+        assertEquals("Movie2,Upcoming,2002-02-02,Genre1",lines.get(1));
     }
 
 }

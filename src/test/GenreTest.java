@@ -15,7 +15,7 @@ public class GenreTest {
         testGenre1 = new Genre("Genre1");
         testMovie1 = new PublicMovie();
         testMovie1.setName("movie1");
-        testMovie1.setDate(2001);
+        testMovie1.setDate("2001-01-01");
         testGenre1.addMovie(testMovie1);
     }
 

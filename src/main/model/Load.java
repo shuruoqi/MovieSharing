@@ -34,7 +34,7 @@ public class Load {
 
     public void set(ArrayList<String> partsOfLine, Movie m) {
         m.setName(partsOfLine.get(0));
-        m.setDate(Integer.parseInt(partsOfLine.get(2)));
+        m.setDate(partsOfLine.get(2));
         ArrayList<String> genrePart = splitOnSpace(partsOfLine.get(3));
         for (String next : genrePart) {
             Genre genre = new Genre(next);

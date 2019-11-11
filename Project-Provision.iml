@@ -21,8 +21,11 @@
           <root url="jar://$MODULE_DIR$/lib/junit-platform-engine-1.4.2.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.ideaLibSources/opentest4j-1.1.1-sources.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="library" name="apiguardian-api-1.1.0" level="project" />
   </component>
 </module>

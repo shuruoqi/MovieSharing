@@ -12,7 +12,7 @@ public class UpcomingMovieTest {
         testMovie = new UpcomingMovie();
 
         testMovie.setName("name");
-        testMovie.setDate(2000);
+        testMovie.setDate("2001-01-01");
     }
 
     @Test
@@ -34,13 +34,13 @@ public class UpcomingMovieTest {
 
     @Test
     public void testGetDate(){
-        assertEquals(2000, testMovie.getDate());
+        assertEquals("2001-01-01", testMovie.getDate());
     }
 
     @Test
     public void testSetDate(){
-        assertEquals(2000, testMovie.getDate());
-        testMovie.setDate(2001);
-        assertEquals(2001, testMovie.getDate());
+        assertEquals("2001-01-01", testMovie.getDate());
+        testMovie.setDate("2002-02-02");
+        assertEquals("2002-02-02", testMovie.getDate());
     }
 }

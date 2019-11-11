@@ -25,9 +25,8 @@ public class MovieOperation {
     }
 
     private void enterDate() {
-        Integer choice;
         System.out.print("Release date: ");
-        choice = Integer.parseInt(scanner.nextLine());
+        choice = scanner.nextLine();
         movie.setDate(choice);
     }
 

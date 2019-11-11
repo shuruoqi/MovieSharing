@@ -20,13 +20,13 @@ public class CinemaListTest {
         testCinemaList = new CinemaList();
         testMovie1 = new PublicMovie();
         testMovie1.setName("name1");
-        testMovie1.setDate(2001);
+        testMovie1.setDate("2001-01-01");
         testMovie2 = new UpcomingMovie();
         testMovie2.setName("name2");
-        testMovie2.setDate(2002);
+        testMovie2.setDate("2002-02-02");
         testMovie3 = new PublicMovie();
         testMovie3.setName("name3");
-        testMovie3.setDate(2003);
+        testMovie3.setDate("2003-03-03");
         testCinemaList.add(testMovie1);
     }
 
@@ -43,6 +43,6 @@ public class CinemaListTest {
         movies = loadCL.load("./data/LoadTestFile.txt");
         assertEquals("Movie1", movies.get(0).getName());
         assertEquals("Public", movies.get(0).getType());
-        assertEquals(2019, movies.get(0).getDate());
+        assertEquals("2001-01-01", movies.get(0).getDate());
     }
 }

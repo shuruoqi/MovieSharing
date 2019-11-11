@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public abstract class Movie {
     private String name; //field
-    private Integer date;
+    private String date;
     private ArrayList<Genre> genres = new ArrayList<>();
 
 
     //EFFECTS: print out all the information of the given movie
     public void printInfo() {
         System.out.println("Movie name:" + getName()
-                + "   Release Date:" + getDate()
-                + "   Genres:" + getAllGenresName());
+                + "   Release Date:" + getDate());
+//                + "   Genres:" + getAllGenresName());
     }
 
     //MODIFIES: this
@@ -30,12 +30,12 @@ public abstract class Movie {
 
     //MODIFIES: this
     //EFFECTS: change the price of the movie to the given parameter name
-    public void setDate(Integer date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
     //EFFECTS: return the price of the movie
-    public Integer getDate() {
+    public String getDate() {
         return date;
     }
 

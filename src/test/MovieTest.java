@@ -15,11 +15,11 @@ public class MovieTest {
     public void setUp() {
         testPublic = new PublicMovie();
         testPublic.setName("Public");
-        testPublic.setDate(2001);
+        testPublic.setDate("2001-01-01");
         testPublic.addGenre(new Genre("Genre1"));
         testUpcoming = new UpcomingMovie();
         testUpcoming.setName("Upcoming");
-        testUpcoming.setDate(2002);
+        testUpcoming.setDate("2002-02-02");
     }
 
     @Test
@@ -39,19 +39,19 @@ public class MovieTest {
     }
 
     @Test
-    public void testSetSize() {
-        assertEquals(2001, testPublic.getDate());
-        testPublic.setDate(2011);
-        assertEquals(2011, testPublic.getDate());
-        assertEquals(2002, testUpcoming.getDate());
-        testUpcoming.setDate(2022);
-        assertEquals(2022, testUpcoming.getDate());
+    public void testSetDate() {
+        assertEquals("2001-01-01", testPublic.getDate());
+        testPublic.setDate("2011-11-11");
+        assertEquals("2011-11-11", testPublic.getDate());
+        assertEquals("2002-02-02", testUpcoming.getDate());
+        testUpcoming.setDate("2012-12-12");
+        assertEquals("2012-12-12", testUpcoming.getDate());
     }
 
     @Test
-    public void testGetSize(){
-        assertEquals(2001, testPublic.getDate());
-        assertEquals(2002, testUpcoming.getDate());
+    public void testGetDate(){
+        assertEquals("2001-01-01", testPublic.getDate());
+        assertEquals("2002-02-02", testUpcoming.getDate());
     }
 
     @Test

@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class ListOperation {
-    Menu menu;
-    MovieOperation movieOperation;
-    WatchList watchList;
-    DownloadList downloadList;
-    CinemaList cinemaList;
+    public Menu menu;
+    public MovieOperation movieOperation;
+    public WatchList watchList;
+    public DownloadList downloadList;
+    public CinemaList cinemaList = new CinemaList();
     Scanner scanner;
     boolean loopState;
 
@@ -20,7 +20,7 @@ public class ListOperation {
         loopState = true;
         menu = new Menu();
         movieOperation = new MovieOperation();
-        cinemaList = new CinemaList();
+//        cinemaList = new CinemaList();
         watchList = new WatchList();
         downloadList = new DownloadList();
         scanner = new Scanner(System.in);
@@ -38,13 +38,13 @@ public class ListOperation {
     }
 
     private void loadAll() throws IOException {
-        cinemaList.load();
+//        cinemaList.load();
         watchList.load();
         downloadList.load();
     }
 
     private void saveAll() throws IOException {
-        cinemaList.save();
+//        cinemaList.save();
         watchList.save();
         downloadList.save();
     }
