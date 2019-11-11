@@ -1,7 +1,7 @@
 package model;
 
 import exception.ReputationException;
-import exception.VipException;
+import exception.UpcomingException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -47,7 +47,7 @@ public abstract class MovieList extends Subject {
         }
     }
 
-    public void add(Movie movie) throws ReputationException, VipException {
+    public void add(Movie movie) throws ReputationException, UpcomingException {
         if (checkRepetition(movie)) {
             throw new ReputationException();
         } else {

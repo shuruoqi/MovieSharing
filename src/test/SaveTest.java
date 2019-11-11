@@ -1,5 +1,5 @@
 import exception.ReputationException;
-import exception.VipException;
+import exception.UpcomingException;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ public class SaveTest {
     MovieList testWatchList;
 
     @BeforeEach
-    public void setUp() throws ReputationException, VipException {
+    public void setUp() throws ReputationException, UpcomingException {
         testSave = new Save();
         testMovie1 = new PublicMovie();
         testWatchList = new WatchList();
@@ -28,15 +28,13 @@ public class SaveTest {
         testGenre2 = new Genre("Genre2");
 
         testMovie1.setName("Movie1");
-        testMovie1.setQuality("720p");
-        testMovie1.setSize(1.0);
+        testMovie1.setDate(2001);
         testMovie1.addGenre(testGenre1);
         testMovie1.addGenre(testGenre2);
 
-        testMovie2 = new VipMovie();
+        testMovie2 = new UpcomingMovie();
         testMovie2.setName("Movie2");
-        testMovie2.setQuality("1080p");
-        testMovie2.setSize(2.0);
+        testMovie2.setDate(2002);
         testMovie2.addGenre(testGenre1);
         testWatchList.add(testMovie1);
         testWatchList.add(testMovie2);
@@ -47,8 +45,8 @@ public class SaveTest {
     public void testSave() throws IOException {
         testSave.save(testWatchList.getList(),"./data/SaveTestFile.txt");
         List<String> lines = Files.readAllLines(Paths.get("./data/SaveTestFile.txt"));
-        assertEquals("Movie1,Public,720p,1.0,Genre1 Genre2",lines.get(0));
-        assertEquals("Movie2,VIP,1080p,2.0,Genre1",lines.get(1));
+        assertEquals("Movie1,Public,2001,Genre1 Genre2",lines.get(0));
+        assertEquals("Movie2,Upcoming,2002,Genre1",lines.get(1));
     }
 
 }

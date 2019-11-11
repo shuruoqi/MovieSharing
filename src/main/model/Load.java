@@ -23,7 +23,7 @@ public class Load {
                 set(partsOfLine, m);
                 movies.add(m);
             } else {
-                Movie m = new VipMovie();
+                Movie m = new UpcomingMovie();
 
                 set(partsOfLine, m);
                 movies.add(m);
@@ -34,9 +34,8 @@ public class Load {
 
     public void set(ArrayList<String> partsOfLine, Movie m) {
         m.setName(partsOfLine.get(0));
-        m.setQuality(partsOfLine.get(2));
-        m.setSize(Double.parseDouble(partsOfLine.get(3)));
-        ArrayList<String> genrePart = splitOnSpace(partsOfLine.get(4));
+        m.setDate(Integer.parseInt(partsOfLine.get(2)));
+        ArrayList<String> genrePart = splitOnSpace(partsOfLine.get(3));
         for (String next : genrePart) {
             Genre genre = new Genre(next);
             m.addGenre(genre);

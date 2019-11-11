@@ -1,79 +1,67 @@
 import model.Genre;
 import model.Movie;
 import model.PublicMovie;
-import model.VipMovie;
+import model.UpcomingMovie;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MovieTest {
-    Movie testRegular;
-    Movie testVip;
+    Movie testPublic;
+    Movie testUpcoming;
 
     @BeforeEach
     public void setUp() {
-        testRegular = new PublicMovie();
-        testRegular.setName("Regular");
-        testRegular.setQuality("720p");
-        testRegular.setSize(1);
-        testRegular.addGenre(new Genre("Genre1"));
-        testVip = new VipMovie();
-        testVip.setName("VIP");
-        testVip.setQuality("1080p");
-        testVip.setSize(2);
+        testPublic = new PublicMovie();
+        testPublic.setName("Public");
+        testPublic.setDate(2001);
+        testPublic.addGenre(new Genre("Genre1"));
+        testUpcoming = new UpcomingMovie();
+        testUpcoming.setName("Upcoming");
+        testUpcoming.setDate(2002);
     }
 
     @Test
     public void testSetName() {
-        assertEquals("Regular", testRegular.getName());
-        testRegular.setName("R");
-        assertEquals("R", testRegular.getName());
-        assertEquals("VIP", testVip.getName());
-        testVip.setName("V");
-        assertEquals("V", testVip.getName());
+        assertEquals("Public", testPublic.getName());
+        testPublic.setName("P");
+        assertEquals("P", testPublic.getName());
+        assertEquals("Upcoming", testUpcoming.getName());
+        testUpcoming.setName("U");
+        assertEquals("U", testUpcoming.getName());
     }
 
     @Test
     public void testGetName(){
-        assertEquals("Regular", testRegular.getName());
-        assertEquals("VIP", testVip.getName());
+        assertEquals("Public", testPublic.getName());
+        assertEquals("Upcoming", testUpcoming.getName());
     }
 
     @Test
     public void testSetSize() {
-        assertEquals(1, testRegular.getSize());
-        testRegular.setSize(1.1);
-        assertEquals(1.1, testRegular.getSize());
-        assertEquals(2, testVip.getSize());
-        testVip.setSize(2.2);
-        assertEquals(2.2, testVip.getSize());
+        assertEquals(2001, testPublic.getDate());
+        testPublic.setDate(2011);
+        assertEquals(2011, testPublic.getDate());
+        assertEquals(2002, testUpcoming.getDate());
+        testUpcoming.setDate(2022);
+        assertEquals(2022, testUpcoming.getDate());
     }
 
     @Test
     public void testGetSize(){
-        assertEquals(1, testRegular.getSize());
-        assertEquals(2, testVip.getSize());
+        assertEquals(2001, testPublic.getDate());
+        assertEquals(2002, testUpcoming.getDate());
     }
 
     @Test
-    public void testSetQuality() {
-        assertEquals("720p", testRegular.getQuality());
-        testRegular.setQuality("1080p");
-        assertEquals("1080p", testRegular.getQuality());
-        assertEquals("1080p", testVip.getQuality());
-        testVip.setQuality("720p");
-        assertEquals("720p", testVip.getQuality());
+    public void testAddGenre() {
+        testUpcoming.addGenre(new Genre("Genre1"));
+        assertEquals("Genre1" , testUpcoming.getGenres().get(0).getName());
     }
 
     @Test
-    public void testGetQuality() {
-        assertEquals("720p", testRegular.getQuality());
-        assertEquals("1080p", testVip.getQuality());
-    }
-
-    @Test
-    public void testPrintAllGenres() {
-
+    public void testGetGenre() {
+        assertEquals("Genre1" , testPublic.getGenres().get(0).getName());
     }
 }

@@ -13,8 +13,7 @@ public class MovieOperation {
 
     public void enterInfo() {
         enterName();
-        enterQuality();
-        enterSize();
+        enterDate();
         enterGenre();
         cinemaList.updateMap(movie);
     }
@@ -25,17 +24,11 @@ public class MovieOperation {
         movie.setName(choice);
     }
 
-    private void enterQuality() {
-        System.out.print("Quality: ");
-        choice = scanner.nextLine();
-        movie.setQuality(choice);
-    }
-
-    private void enterSize() {
-        double choice;
-        System.out.print("Size: ");
-        choice = Double.parseDouble(scanner.nextLine());
-        movie.setSize(choice);
+    private void enterDate() {
+        Integer choice;
+        System.out.print("Release date: ");
+        choice = Integer.parseInt(scanner.nextLine());
+        movie.setDate(choice);
     }
 
     private void enterGenre() {
@@ -59,8 +52,8 @@ public class MovieOperation {
     public void chooseTypeResult() {
         if (type.equals("Public")) {
             movie = new PublicMovie();
-        } else if (type.equals("VIP")) {
-            movie = new VipMovie();
+        } else if (type.equals("Upcoming")) {
+            movie = new UpcomingMovie();
         }
     }
 }

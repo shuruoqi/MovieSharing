@@ -11,8 +11,7 @@ public class Save {
         for (Movie m : movies) {
             writer.println(m.getName() + ","
                     + m.getType() + ","
-                    + m.getQuality() + ","
-                    + m.getSize() + ","
+                    + m.getDate() + ","
                     + m.getAllGenresName());
         }
         writer.close();

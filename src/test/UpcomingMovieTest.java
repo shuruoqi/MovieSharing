@@ -1,15 +1,15 @@
-import model.PublicMovie;
+import model.UpcomingMovie;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class PublicMovieTest {
-    PublicMovie testMovie;
+public class UpcomingMovieTest {
+    UpcomingMovie testMovie;
 
     @BeforeEach
     public void setUp(){
-        testMovie = new PublicMovie();
+        testMovie = new UpcomingMovie();
 
         testMovie.setName("name");
         testMovie.setDate(2000);
@@ -29,7 +29,7 @@ public class PublicMovieTest {
 
     @Test
     public void testGetType() {
-        assertEquals("Public",testMovie.getType());
+        assertEquals("Upcoming",testMovie.getType());
     }
 
     @Test

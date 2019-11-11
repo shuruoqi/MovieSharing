@@ -1,5 +1,5 @@
 import exception.ReputationException;
-import exception.VipException;
+import exception.UpcomingException;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,26 +17,23 @@ public class DownloadListTest {
     Movie testMovie3;
 
     @BeforeEach
-    public void setUp() throws ReputationException, VipException {
+    public void setUp() throws ReputationException, UpcomingException {
         testDownloadList = new DownloadList();
         testMovie1 = new PublicMovie();
         testMovie1.setName("name1");
-        testMovie1.setQuality("720p");
-        testMovie1.setSize(2);
-        testMovie2 = new VipMovie();
+        testMovie1.setDate(2001);
+        testMovie2 = new UpcomingMovie();
         testMovie2.setName("name2");
-        testMovie2.setQuality("1080p");
-        testMovie2.setSize(12);
+        testMovie2.setDate(2002);
         testMovie3 = new PublicMovie();
         testMovie3.setName("name3");
-        testMovie3.setQuality("720p");
-        testMovie3.setSize(2);
+        testMovie3.setDate(2003);
         testDownloadList.add(testMovie1);
     }
 
 
     @Test
-    public void testAdd() throws ReputationException, VipException {
+    public void testAdd() throws ReputationException, UpcomingException {
         testDownloadList.add(testMovie3);
         assertEquals("name3",testDownloadList.getList().get(1).getName());
     }
@@ -48,8 +45,7 @@ public class DownloadListTest {
         movies = loadDL.load("./data/LoadTestFile.txt");
         assertEquals("Movie1", movies.get(0).getName());
         assertEquals("Public", movies.get(0).getType());
-        assertEquals("1080p", movies.get(0).getQuality());
-        assertEquals(1.0, movies.get(0).getSize());
+        assertEquals(2019, movies.get(0).getDate());
     }
 
     @Test
@@ -70,7 +66,7 @@ public class DownloadListTest {
         try {
             testDownloadList.add(testMovie1);
             fail("Exception was not thrown!");
-        } catch (VipException e) {
+        } catch (UpcomingException e) {
             //e.printStackTrace();
             fail("Wrong Exception thrown : VipException");
         } catch (ReputationException e) {
@@ -84,7 +80,7 @@ public class DownloadListTest {
         try {
             testDownloadList.add(testMovie2);
             fail("Exception was not thrown!");
-        } catch (VipException e) {
+        } catch (UpcomingException e) {
             //expected
         } catch (ReputationException e) {
             fail("Wrong Exception thrown : ReputationException");

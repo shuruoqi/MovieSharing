@@ -1,7 +1,7 @@
 package ui;
 
 import exception.ReputationException;
-import exception.VipException;
+import exception.UpcomingException;
 import model.*;
 
 import java.io.IOException;
@@ -74,7 +74,7 @@ public class ListOperation {
         return true;
     }
 
-    public void helper(MovieList movieList, String operation) throws ReputationException, VipException {
+    public void helper(MovieList movieList, String operation) throws ReputationException, UpcomingException {
         String name = scanner.nextLine();
         Movie movie = cinemaList.getMovie(name);
         movie.printInfo();
@@ -95,7 +95,7 @@ public class ListOperation {
         printQuestion(operation);
         try {
             helper(watchList,operation);
-        } catch (ReputationException | VipException e) {
+        } catch (ReputationException | UpcomingException e) {
             watchList.printAlready(operation);
         }
     }
@@ -116,10 +116,8 @@ public class ListOperation {
             helper(downloadList, operation);
         } catch (ReputationException e) {
             downloadList.printAlready(operation);
-        } catch (VipException e) {
-            System.out.println("VIP movies are not downloadable, but they are accessible online.");
-        } finally {
-            System.out.println("Enjoy the movie!");
+        } catch (UpcomingException e) {
+            System.out.println("Upcoming movies are not downloadable.");
         }
     }
 
@@ -130,7 +128,7 @@ public class ListOperation {
             movieOperation.enterInfo();
             cinemaList.add(movieOperation.movie);
             printSuccess(operation);
-        } catch (ReputationException | VipException e) {
+        } catch (ReputationException | UpcomingException e) {
             cinemaList.printAlready(operation);
         }
     }

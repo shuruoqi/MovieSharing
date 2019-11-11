@@ -1,4 +1,7 @@
-package model;
+package ui;
+
+import model.Movie;
+import model.Observer;
 
 public class User implements Observer {
     private String name;
@@ -7,6 +10,7 @@ public class User implements Observer {
         this.name = name;
     }
 
+    @Override
     public String getName() {
         return name;
     }

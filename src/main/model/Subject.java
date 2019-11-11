@@ -10,6 +10,10 @@ public abstract class Subject {
         observers = new ArrayList<>();
     }
 
+    public List<Observer> getObservers() {
+        return observers;
+    }
+
     public void addObserver(Observer o) {
         if (!observers.contains(o)) {
             observers.add(o);
