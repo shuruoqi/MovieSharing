@@ -2,10 +2,11 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MyFrame extends JFrame {
+
+    private static String []genres = {"Action", "Adventure", "Animation", "Crime", "Comedy", "Drama", "Family",
+            "Fantasy", "Horror", "Mystery", "Romance", "SciFi", "Superhero", "Other"};
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -22,13 +23,13 @@ public class MyFrame extends JFrame {
 
         frame.setLayout(null);
 
-        insertLogo(frame);
+        bilibiliLogo(frame);
         initialButton(frame);
 
         frame.setVisible(true);
     }
 
-    public static void initialButton(JFrame frame) {
+    private static void initialButton(JFrame frame) {
         JButton search = new JButton("Search");
         JButton upload = new JButton("Upload");
         JButton checkWatchlist = new JButton("Check Watchlist");
@@ -40,22 +41,12 @@ public class MyFrame extends JFrame {
         frame.add(upload);
         frame.add(checkWatchlist);
 
-        search.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                search();
-            }
-        });
+        search.addActionListener(e -> search());
 
-        upload.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                uploadMovie();
-            }
-        });
+        upload.addActionListener(e -> uploadMovie());
     }
 
-    public static void insertLogo(JFrame frame) {
+    private static void bilibiliLogo(JFrame frame) {
         JPanel panel = new JPanel();
         JLabel label = new JLabel();
         ImageIcon img = new ImageIcon("./data/Bilibili.jpg");
@@ -65,16 +56,28 @@ public class MyFrame extends JFrame {
         panel.add(label);
     }
 
-    public static void search() {
+    private static JButton searchButton() {
+        JButton searchButton = new JButton();
+        searchButton.setIcon(new ImageIcon("./data/SearchLogo.jpg"));
+        return searchButton;
+    }
+
+    private static JButton uploadButton() {
+        JButton uploadButton = new JButton();
+        uploadButton.setIcon(new ImageIcon("./data/UploadLogo.jpg"));
+        return uploadButton;
+    }
+
+    private static void search() {
         JFrame searchFrame = new JFrame("Search");
         searchFrame.setBounds(200, 200, 400, 300);
-        searchFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        searchFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         searchFrame.setLayout(null);
 
         JButton searchMovie = new JButton("Search Movie");
-        JButton searchGenre = new JButton("Search Genre");
         searchMovie.setBounds(125, 80, 150, 50);
+        JButton searchGenre = new JButton("Search Genre");
         searchGenre.setBounds(125, 160, 150, 50);
 
         searchFrame.add(searchMovie);
@@ -82,39 +85,21 @@ public class MyFrame extends JFrame {
 
         searchFrame.setVisible(true);
 
-        searchGenre.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                searchGenre();
-            }
-        });
+        searchGenre.addActionListener(e -> searchGenre());
 
-        searchMovie.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                searchMovie();
-            }
-        });
+        searchMovie.addActionListener(e -> searchMovie());
     }
 
-    public static JButton searchButton() {
-        JButton searchButton = new JButton();
-        searchButton.setIcon(new ImageIcon("./data/SearchLogo.jpg"));
-        return searchButton;
-    }
-
-    public static void searchGenre() {
+    private static void searchGenre() {
         JFrame searchGenreFrame = new JFrame("Search Genre");
         searchGenreFrame.setBounds(200, 200, 400, 300);
-        searchGenreFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        searchGenreFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         searchGenreFrame.setLayout(null);
 
         JPanel genrePanel = new JPanel();
         JLabel genreLabel = new JLabel("Genre:");
-        String []genre = {"Action", "Adventure", "Animation", "Crime", "Comedy", "Drama", "Family", "Fantasy",
-                "Horror", "Mystery", "Romance", "SciFi", "Superhero", "Other"};
-        JComboBox genreComboBox = new JComboBox(genre);
+        JComboBox genreComboBox = new JComboBox(genres);
         genrePanel.setBounds(125,80,140,55);
         genrePanel.add(genreLabel);
         genrePanel.add(genreComboBox);
@@ -127,10 +112,10 @@ public class MyFrame extends JFrame {
         searchGenreFrame.setVisible(true);
     }
 
-    public static void searchMovie() {
+    private static void searchMovie() {
         JFrame searchMovieFrame = new JFrame("Search Movie");
         searchMovieFrame.setBounds(200, 200, 400, 300);
-        searchMovieFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        searchMovieFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         searchMovieFrame.setLayout(null);
 
@@ -149,72 +134,69 @@ public class MyFrame extends JFrame {
         searchMovieFrame.setVisible(true);
     }
 
-    public static void uploadMovie() {
+    private static void uploadMovie() {
         JFrame uploadMovieFrame = new JFrame("Upload Movie");
         uploadMovieFrame.setBounds(200, 200, 400, 300);
-        uploadMovieFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        uploadMovieFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         uploadMovieFrame.setLayout(null);
 
-        JPanel typePanel = new JPanel();
-        JLabel typeLabel = new JLabel("Type:");
-        String []type = {"Public", "Upcoming"};
-        JComboBox typeComboBox = new JComboBox(type);
-        typePanel.setBounds(50,10,300,30);
-        typePanel.add(typeLabel);
-        typePanel.add(typeComboBox);
-
-        JPanel namePanel = new JPanel();
-        JLabel nameLabel = new JLabel("Name:");
-        JTextField enterName = new JTextField(20);
-        namePanel.setBounds(50,40,300,30);
-        namePanel.add(nameLabel);
-        namePanel.add(enterName);
-
-        JPanel datePanel = new JPanel();
-        JLabel dateLabel = new JLabel("Release Date (yyyy-mm-dd):");
-        JTextField enterDate = new JTextField(8);
-        datePanel.setBounds(50,70,300,30);
-        datePanel.add(dateLabel);
-        datePanel.add(enterDate);
-
-        JCheckBox action = new JCheckBox("Action");
-        JCheckBox adventure = new JCheckBox("Adventure");
-        JCheckBox animation = new JCheckBox("Animation");
-        JCheckBox crime = new JCheckBox("Crime");
-        JCheckBox comedy = new JCheckBox("Comedy");
-        JCheckBox drama = new JCheckBox("Drama");
-        JCheckBox family = new JCheckBox("Family");
-        JCheckBox fantasy = new JCheckBox("Fantasy");
-        JCheckBox horror = new JCheckBox("Horror");
-        JCheckBox mystery = new JCheckBox("Mystery");
-        JCheckBox romance = new JCheckBox("Romance");
-        JCheckBox sciFi = new JCheckBox("SciFi");
-        JCheckBox superhero = new JCheckBox("Superhero");
-        JCheckBox other = new JCheckBox("Other");
-        JPanel genrePanel = new JPanel();
-        genrePanel.setBorder(BorderFactory.createTitledBorder("Genre:"));
-        genrePanel.setLayout(new GridLayout(5, 3));
-        genrePanel.add(action);
-        genrePanel.add(adventure);
-        genrePanel.add(animation);
-        genrePanel.add(crime);
-        genrePanel.add(comedy);
-        genrePanel.add(drama);
-        genrePanel.add(family);
-        genrePanel.add(fantasy);
-        genrePanel.add(horror);
-        genrePanel.add(mystery);
-        genrePanel.add(romance);
-        genrePanel.add(sciFi);
-        genrePanel.add(superhero);
-        genrePanel.add(other);
-        genrePanel.setBounds(30,115,340,160);
+        JPanel typePanel = typePanel();
+        JPanel namePanel = namePanel();
+        JPanel datePanel = datePanel();
+        JPanel genrePanel = genreCheckBoxPanel();
+        JButton uploadButton  = uploadButton();
+        uploadButton.setBounds(312,242,35,35);
 
         uploadMovieFrame.add(typePanel);
         uploadMovieFrame.add(namePanel);
         uploadMovieFrame.add(datePanel);
         uploadMovieFrame.add(genrePanel);
+        uploadMovieFrame.add(uploadButton);
         uploadMovieFrame.setVisible(true);
     }
+
+    private static JPanel typePanel() {
+        JPanel typePanel = new JPanel();
+        JLabel typeLabel = new JLabel("Type:");
+        String []type = {"Public", "Upcoming"};
+        JComboBox typeComboBox = new JComboBox(type);
+        typePanel.setBounds(50,5,300,28);
+        typePanel.add(typeLabel);
+        typePanel.add(typeComboBox);
+        return typePanel;
+    }
+
+    private static JPanel namePanel() {
+        JPanel namePanel = new JPanel();
+        JLabel nameLabel = new JLabel("Name:");
+        JTextField enterName = new JTextField(20);
+        namePanel.setBounds(50,33,300,28);
+        namePanel.add(nameLabel);
+        namePanel.add(enterName);
+        return namePanel;
+    }
+
+    private static JPanel datePanel() {
+        JPanel datePanel = new JPanel();
+        JLabel dateLabel = new JLabel("Release Date (yyyy-mm-dd):");
+        JTextField enterDate = new JTextField(8);
+        datePanel.setBounds(50,61,300,28);
+        datePanel.add(dateLabel);
+        datePanel.add(enterDate);
+        return datePanel;
+    }
+
+    private static JPanel genreCheckBoxPanel() {
+        JPanel genrePanel = new JPanel();
+        genrePanel.setBorder(BorderFactory.createTitledBorder("Genre:"));
+        genrePanel.setLayout(new GridLayout(5, 3));
+        for (String s : genres) {
+            JCheckBox box = new JCheckBox(s);
+            genrePanel.add(box);
+        }
+        genrePanel.setBounds(45,94,305,150);
+        return genrePanel;
+    }
+
 }
