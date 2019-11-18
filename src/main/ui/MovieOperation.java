@@ -5,13 +5,13 @@ import model.*;
 import java.util.Scanner;
 
 public class MovieOperation {
-    public CinemaList cinemaList = new CinemaList();
+    private CinemaList cinemaList = new CinemaList();
     public Movie movie;
     private String choice;
     private Scanner scanner = new Scanner(System.in);
     private String type;
 
-    public void enterInfo() {
+    void enterInfo() {
         enterName();
         enterDate();
         enterGenre();
@@ -42,13 +42,13 @@ public class MovieOperation {
         }
     }
 
-    public void identifyType() {
+    void identifyType() {
         System.out.print("Type: ");
         type = scanner.nextLine();
         chooseTypeResult();
     }
 
-    public void chooseTypeResult() {
+    private void chooseTypeResult() {
         if (type.equals("Public")) {
             movie = new PublicMovie();
         } else if (type.equals("Upcoming")) {

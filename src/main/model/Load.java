@@ -32,7 +32,7 @@ public class Load {
         return movies;
     }
 
-    public void set(ArrayList<String> partsOfLine, Movie m) {
+    private void set(ArrayList<String> partsOfLine, Movie m) {
         m.setName(partsOfLine.get(0));
         m.setDate(partsOfLine.get(2));
         ArrayList<String> genrePart = splitOnSpace(partsOfLine.get(3));
@@ -42,12 +42,12 @@ public class Load {
         }
     }
 
-    public ArrayList<String> splitOnComma(String line) {
+    private ArrayList<String> splitOnComma(String line) {
         String[] splits = line.split(",");
         return new ArrayList<>(Arrays.asList(splits));
     }
 
-    public ArrayList<String> splitOnSpace(String line) {
+    private ArrayList<String> splitOnSpace(String line) {
         String[] splits = line.split(" ");
         return new ArrayList<>(Arrays.asList(splits));
     }

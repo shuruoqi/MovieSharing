@@ -8,27 +8,22 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class ListOperation {
-    public Menu menu;
-    public MovieOperation movieOperation;
-    public WatchList watchList;
-    public DownloadList downloadList;
-    public CinemaList cinemaList = new CinemaList();
-    Scanner scanner;
-    boolean loopState;
+    private Menu menu;
+    private MovieOperation movieOperation;
+    private WatchList watchList;
+    private DownloadList downloadList;
+    private CinemaList cinemaList;
+    private Scanner scanner;
 
     void start() throws IOException {
-        loopState = true;
+        boolean loopState = true;
         menu = new Menu();
         movieOperation = new MovieOperation();
-//        cinemaList = new CinemaList();
+        cinemaList = new CinemaList();
         watchList = new WatchList();
         downloadList = new DownloadList();
         scanner = new Scanner(System.in);
-        User alice = new User("Alice");
-        User bob = new User("Bob");
 
-        cinemaList.addObserver(alice);
-        cinemaList.addObserver(bob);
         loadAll();
         System.out.println("Welcome!");
         while (loopState) {
@@ -38,13 +33,13 @@ public class ListOperation {
     }
 
     private void loadAll() throws IOException {
-//        cinemaList.load();
+        cinemaList.load();
         watchList.load();
         downloadList.load();
     }
 
     private void saveAll() throws IOException {
-//        cinemaList.save();
+        cinemaList.save();
         watchList.save();
         downloadList.save();
     }
@@ -54,7 +49,7 @@ public class ListOperation {
         return evaluate(menu.getChoice());
     }
 
-    private boolean evaluate(int choice) {
+    public boolean evaluate(int choice) {
         if (choice == 1) {
             watchList.showAll();
         } else if (choice == 2) {
@@ -74,7 +69,7 @@ public class ListOperation {
         return true;
     }
 
-    public void helper(MovieList movieList, String operation) throws ReputationException, UpcomingException {
+    private void helper(MovieList movieList, String operation) throws ReputationException, UpcomingException {
         String name = scanner.nextLine();
         Movie movie = cinemaList.getMovie(name);
         movie.printInfo();
@@ -82,15 +77,15 @@ public class ListOperation {
         printSuccess(operation);
     }
 
-    public void printQuestion(String operation) {
+    private void printQuestion(String operation) {
         System.out.println("Which movie would you like to " + operation + "?");
     }
 
-    public void printSuccess(String operation) {
+    private void printSuccess(String operation) {
         System.out.println(operation + " successfully");
     }
 
-    public void addMovie() {
+    private void addMovie() {
         String operation = "add";
         printQuestion(operation);
         try {
@@ -100,7 +95,7 @@ public class ListOperation {
         }
     }
 
-    public void deleteMovie() {
+    private void deleteMovie() {
         String operation = "delete";
         watchList.showAll();
         printQuestion(operation);
@@ -109,7 +104,7 @@ public class ListOperation {
         printSuccess(operation);
     }
 
-    public void download() {
+    private void download() {
         String operation = "download";
         printQuestion(operation);
         try {
@@ -121,7 +116,7 @@ public class ListOperation {
         }
     }
 
-    public void upload() {
+    private void upload() {
         String operation = "upload";
         try {
             movieOperation.identifyType();
@@ -133,7 +128,7 @@ public class ListOperation {
         }
     }
 
-    public void printMoviesOfGivenGenre() {
+    private void printMoviesOfGivenGenre() {
         System.out.println("Which movie Genre would you like to choose?");
         String genreName = scanner.nextLine();
         for (Genre genre : cinemaList.genreMap.keySet()) {

@@ -1,0 +1,16 @@
+Spiderman: Homecoming,Public,2017-07-07,Action Superhero
+Thor: Ragnarok,Public,2017-11-03,Superhero Adventure
+Ironman3,Public,2013-05-03,Action Adventure
+Captain America: Civil War,Public,2016-04-18,Action
+Avengers: Endgame,Public,2019-04-26,Action
+Lucy,Public,2014-07-25,SciFi Action
+The Lion King,Public,2019-07-19,Animation Drama Adventure
+Transformers: The Last Knight,Public,2017-06-21,Action Adventure SciFi
+Black Panther,Public,2018-01-29,Action Adventure Superhero
+Captain Marvel,Public,2019-03-08,SciFin Action Adventure
+Now You See Me2,Public,2016-06-10,Crime Mystery
+Little Women,Upcoming,2019-12-25,Drama
+Star War: The Rise Of Skywalker,Upcoming,2019-12-20,Action Adventure Fantasy SciFi
+Frozen2,Upcoming,2019-11-22,Animation Comedy Family
+Zootopia,Public,2016-03-04,Animation Comedy Adventure
+Mulan,Upcoming,2020-03-27,Action Adventure Drama

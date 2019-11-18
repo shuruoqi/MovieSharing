@@ -5,12 +5,12 @@ import exception.UpcomingException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public abstract class MovieList extends Subject {
+public abstract class MovieList {
     public ArrayList<Movie> movies;
     public Load load = new Load();
-    public Save save = new Save();
+    Save save = new Save();
 
-    public MovieList() {
+    MovieList() {
         movies = new ArrayList<>();
     }
 
@@ -52,7 +52,6 @@ public abstract class MovieList extends Subject {
             throw new ReputationException();
         } else {
             movies.add(movie);
-            notifyObservers(movie);
         }
     }
 

@@ -3,7 +3,7 @@ package ui;
 import java.util.Scanner;
 
 public class Menu {
-    public void printChoices() {
+    void printChoices() {
         System.out.println("[1] check watchlist");
         System.out.println("[2] add to watchlist");
         System.out.println("[3] delete from watchlist");
@@ -13,7 +13,7 @@ public class Menu {
         System.out.println("[7] exit");
     }
 
-    public Integer getChoice() {
+    Integer getChoice() {
         Scanner scanner = new Scanner(System.in);
         int choice = Integer.parseInt(scanner.nextLine());
         return choice;
