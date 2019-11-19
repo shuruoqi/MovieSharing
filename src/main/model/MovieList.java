@@ -1,6 +1,6 @@
 package model;
 
-import exception.ReputationException;
+import exception.RepetitionException;
 import exception.UpcomingException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,15 +41,17 @@ public abstract class MovieList {
         return null;
     }
 
-    public void showAll() {
+    public ArrayList<String> showAll() {
+        ArrayList<String> allInfo = new ArrayList<>();
         for (Movie m : movies) {
-            m.printInfo();
+            allInfo.add(m.printInfo());
         }
+        return allInfo;
     }
 
-    public void add(Movie movie) throws ReputationException, UpcomingException {
+    public void add(Movie movie) throws RepetitionException, UpcomingException {
         if (checkRepetition(movie)) {
-            throw new ReputationException();
+            throw new RepetitionException();
         } else {
             movies.add(movie);
         }

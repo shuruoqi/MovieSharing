@@ -1,4 +1,4 @@
-import exception.ReputationException;
+import exception.RepetitionException;
 import exception.UpcomingException;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +17,7 @@ public class DownloadListTest {
     Movie testMovie3;
 
     @BeforeEach
-    public void setUp() throws ReputationException, UpcomingException {
+    public void setUp() throws RepetitionException, UpcomingException {
         testDownloadList = new DownloadList();
         testMovie1 = new PublicMovie();
         testMovie1.setName("name1");
@@ -33,7 +33,7 @@ public class DownloadListTest {
 
 
     @Test
-    public void testAdd() throws ReputationException, UpcomingException {
+    public void testAdd() throws RepetitionException, UpcomingException {
         testDownloadList.add(testMovie3);
         assertEquals("name3",testDownloadList.getList().get(1).getName());
     }
@@ -69,7 +69,7 @@ public class DownloadListTest {
         } catch (UpcomingException e) {
             //e.printStackTrace();
             fail("Wrong Exception thrown : VipException");
-        } catch (ReputationException e) {
+        } catch (RepetitionException e) {
             //expected
         }
     }
@@ -82,7 +82,7 @@ public class DownloadListTest {
             fail("Exception was not thrown!");
         } catch (UpcomingException e) {
             //expected
-        } catch (ReputationException e) {
+        } catch (RepetitionException e) {
             fail("Wrong Exception thrown : ReputationException");
         }
     }

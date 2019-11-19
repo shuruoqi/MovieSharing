@@ -1,4 +1,4 @@
-import exception.ReputationException;
+import exception.RepetitionException;
 import exception.UpcomingException;
 import model.Load;
 import model.Movie;
@@ -45,7 +45,7 @@ public class WatchListTest {
     }
 
     @Test
-    public void testAdd() throws ReputationException, UpcomingException {
+    public void testAdd() throws RepetitionException, UpcomingException {
         testWatchList.add(testMovie3);
         assertEquals("name3",testWatchList.getList().get(1).getName());
     }
@@ -71,7 +71,7 @@ public class WatchListTest {
         } catch (UpcomingException e) {
             //e.printStackTrace();
             fail("Wrong Exception thrown : VipException");
-        } catch (ReputationException e) {
+        } catch (RepetitionException e) {
             //expected
         }
     }

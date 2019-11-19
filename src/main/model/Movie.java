@@ -9,10 +9,10 @@ public abstract class Movie {
 
 
     //EFFECTS: print out all the information of the given movie
-    public void printInfo() {
-        System.out.println("Movie name:" + getName()
-                + "   Release Date:" + getDate()
-                + "   Genres:" + getAllGenresName());
+    public String printInfo() {
+        return ("Name:" + getName()
+                + "---ReleaseDate:" + getDate()
+                + "---Genres:" + getAllGenresName());
     }
 
     //MODIFIES: this

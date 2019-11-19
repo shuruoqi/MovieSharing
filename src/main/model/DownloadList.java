@@ -1,14 +1,14 @@
 package model;
 
-import exception.ReputationException;
+import exception.RepetitionException;
 import exception.UpcomingException;
 import java.io.IOException;
 
 public class DownloadList extends MovieList {
 
-    public void add(Movie movie) throws ReputationException, UpcomingException {
+    public void add(Movie movie) throws RepetitionException, UpcomingException {
         if (checkRepetition(movie)) {
-            throw new ReputationException();
+            throw new RepetitionException();
         } else if (movie.getType().equals("Upcoming")) {
             throw new UpcomingException();
         } else {

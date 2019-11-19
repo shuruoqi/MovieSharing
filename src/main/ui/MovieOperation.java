@@ -9,7 +9,7 @@ public class MovieOperation {
     public Movie movie;
     private String choice;
     private Scanner scanner = new Scanner(System.in);
-    private String type;
+    public String type;
 
     void enterInfo() {
         enterName();
@@ -45,10 +45,10 @@ public class MovieOperation {
     void identifyType() {
         System.out.print("Type: ");
         type = scanner.nextLine();
-        chooseTypeResult();
+        chooseTypeResult(type);
     }
 
-    private void chooseTypeResult() {
+    public void chooseTypeResult(String type) {
         if (type.equals("Public")) {
             movie = new PublicMovie();
         } else if (type.equals("Upcoming")) {

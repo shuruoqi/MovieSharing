@@ -1,4 +1,4 @@
-import exception.ReputationException;
+import exception.RepetitionException;
 import exception.UpcomingException;
 import model.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +16,7 @@ public class CinemaListTest {
     Movie testMovie3;
 
     @BeforeEach
-    public void setUp() throws IOException, ReputationException, UpcomingException {
+    public void setUp() throws IOException, RepetitionException, UpcomingException {
         testCinemaList = new CinemaList();
         testMovie1 = new PublicMovie();
         testMovie1.setName("name1");

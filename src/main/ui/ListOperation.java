@@ -1,23 +1,25 @@
 package ui;
 
-import exception.ReputationException;
+import exception.RepetitionException;
 import exception.UpcomingException;
 import model.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ListOperation {
     private Menu menu;
-    private MovieOperation movieOperation;
-    private WatchList watchList;
-    private DownloadList downloadList;
-    private CinemaList cinemaList;
+    public MovieOperation movieOperation;
+    public WatchList watchList;
+    public DownloadList downloadList;
+    public CinemaList cinemaList;
+
     private Scanner scanner;
 
     void start() throws IOException {
         boolean loopState = true;
-        menu = new Menu();
+//        menu = new Menu();
         movieOperation = new MovieOperation();
         cinemaList = new CinemaList();
         watchList = new WatchList();
@@ -25,11 +27,11 @@ public class ListOperation {
         scanner = new Scanner(System.in);
 
         loadAll();
-        System.out.println("Welcome!");
-        while (loopState) {
-            loopState = loop();
-        }
-        saveAll();
+//        System.out.println("Welcome!");
+//        while (loopState) {
+//            loopState = loop();
+//        }
+//        saveAll();
     }
 
     private void loadAll() throws IOException {
@@ -38,18 +40,18 @@ public class ListOperation {
         downloadList.load();
     }
 
-    private void saveAll() throws IOException {
+    void saveAll() throws IOException {
         cinemaList.save();
         watchList.save();
         downloadList.save();
     }
 
-    private boolean loop() {
+    private boolean loop() throws UpcomingException, RepetitionException {
         menu.printChoices();
         return evaluate(menu.getChoice());
     }
 
-    public boolean evaluate(int choice) {
+    public boolean evaluate(int choice) throws UpcomingException, RepetitionException {
         if (choice == 1) {
             watchList.showAll();
         } else if (choice == 2) {
@@ -61,7 +63,8 @@ public class ListOperation {
         } else if (choice == 5) {
             upload();
         } else if (choice == 6) {
-            printMoviesOfGivenGenre();
+            String genreName = scanner.nextLine();
+            printMoviesOfGivenGenre(genreName);
         } else if (choice == 7) {
             System.out.println("See you!");
             return false;
@@ -69,12 +72,17 @@ public class ListOperation {
         return true;
     }
 
-    private void helper(MovieList movieList, String operation) throws ReputationException, UpcomingException {
+    private void helper(MovieList movieList, String operation) throws RepetitionException, UpcomingException {
         String name = scanner.nextLine();
-        Movie movie = cinemaList.getMovie(name);
+        Movie movie = searchMovie(name);
         movie.printInfo();
         movieList.add(movie);
         printSuccess(operation);
+    }
+
+    public Movie searchMovie(String name) {
+        Movie movie = cinemaList.getMovie(name);
+        return movie;
     }
 
     private void printQuestion(String operation) {
@@ -85,14 +93,14 @@ public class ListOperation {
         System.out.println(operation + " successfully");
     }
 
-    private void addMovie() {
+    public void addMovie() throws UpcomingException, RepetitionException {
         String operation = "add";
-        printQuestion(operation);
-        try {
-            helper(watchList,operation);
-        } catch (ReputationException | UpcomingException e) {
-            watchList.printAlready(operation);
-        }
+//        printQuestion(operation);
+//        try {
+        helper(watchList, operation);
+//        } catch (RepetitionException | UpcomingException e) {
+//            watchList.printAlready(operation);
+//        }
     }
 
     private void deleteMovie() {
@@ -109,35 +117,37 @@ public class ListOperation {
         printQuestion(operation);
         try {
             helper(downloadList, operation);
-        } catch (ReputationException e) {
+        } catch (RepetitionException e) {
             downloadList.printAlready(operation);
         } catch (UpcomingException e) {
             System.out.println("Upcoming movies are not downloadable.");
         }
     }
 
-    private void upload() {
+    public void upload() throws RepetitionException, UpcomingException {
         String operation = "upload";
-        try {
-            movieOperation.identifyType();
-            movieOperation.enterInfo();
-            cinemaList.add(movieOperation.movie);
-            printSuccess(operation);
-        } catch (ReputationException | UpcomingException e) {
-            cinemaList.printAlready(operation);
-        }
+//        try {
+        movieOperation.identifyType();
+        movieOperation.enterInfo();
+        cinemaList.add(movieOperation.movie);
+        printSuccess(operation);
+//        } catch (RepetitionException | UpcomingException e) {
+//            cinemaList.printAlready(operation);
+//        }
     }
 
-    private void printMoviesOfGivenGenre() {
-        System.out.println("Which movie Genre would you like to choose?");
-        String genreName = scanner.nextLine();
+    public ArrayList<String> printMoviesOfGivenGenre(String genreName) {
+        ArrayList<String> result = new ArrayList<>();
+//        System.out.println("Which movie Genre would you like to choose?");
+//        String genreName = scanner.nextLine();
         for (Genre genre : cinemaList.genreMap.keySet()) {
             if (genre.equals(new Genre(genreName))) {
                 for (Movie movie : genre.getMovies()) {
-                    System.out.print(movie.getName() + "; ");
+                    result.add(movie.getName());
                 }
-                System.out.println(" ");
+//                System.out.println(" ");
             }
         }
+        return result;
     }
 }
