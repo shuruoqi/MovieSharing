@@ -13,6 +13,7 @@ import java.util.Arrays;
 public class GUI extends JFrame {
 
     static ListOperation listOperation;
+    static JFrame mainFrame;
     static String selectedGenre = "";
     static JTextField searchName;
     static JComboBox genreComboBox;
@@ -21,44 +22,55 @@ public class GUI extends JFrame {
     static JTextField enterDate;
     static JPanel genrePanel;
 
-    private static String []genres = {"Action", "Adventure", "Animation", "Crime", "Comedy", "Drama", "Family",
+    private static String[] genres = {"Action", "Adventure", "Animation", "Crime", "Comedy", "Drama", "Family",
             "Fantasy", "Horror", "Mystery", "Romance", "SciFi", "Superhero", "Other"};
 
     public static void main(String[] args) throws IOException {
         listOperation = new ListOperation();
         listOperation.start();
         javax.swing.SwingUtilities.invokeLater(() -> createAndShowGUI());
-        listOperation.saveAll();
     }
 
     public static void createAndShowGUI() {
-        JFrame frame = new JFrame("MovieSharing");
-        frame.setBounds(200, 200, 400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame = new JFrame("MovieSharing");
+        mainFrame.setBounds(200, 200, 400, 300);
+        mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        mainFrame.setLayout(null);
 
-        frame.setLayout(null);
+        bilibiliLogo(mainFrame);
+        initialButton(mainFrame);
 
-        bilibiliLogo(frame);
-        initialButton(frame);
-
-        frame.setVisible(true);
+        mainFrame.setVisible(true);
     }
 
     private static void initialButton(JFrame frame) {
         JButton search = new JButton("Search");
+        search.setBounds(125, 150, 150, 30);
         JButton upload = new JButton("Upload");
+        upload.setBounds(125, 180, 150, 30);
         JButton checkWatchlist = new JButton("Check Watchlist");
-        search.setBounds(125, 150, 150, 35);
-        upload.setBounds(125, 185, 150, 35);
-        checkWatchlist.setBounds(125, 220, 150, 35);
+        checkWatchlist.setBounds(125, 210, 150, 30);
+        JButton exit = new JButton("Exit");
+        exit.setBounds(125, 240, 150, 30);
 
         frame.add(search);
         frame.add(upload);
         frame.add(checkWatchlist);
+        frame.add(exit);
 
         search.addActionListener(e -> search());
         upload.addActionListener(e -> uploadMovie());
         checkWatchlist.addActionListener(e -> checkWatchlist());
+        exit.addActionListener(e -> saveAndExit());
+    }
+
+    static void saveAndExit() {
+        try {
+            listOperation.saveAll();
+            mainFrame.dispose();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void bilibiliLogo(JFrame frame) {
@@ -66,7 +78,7 @@ public class GUI extends JFrame {
         JLabel label = new JLabel();
         ImageIcon img = new ImageIcon("./data/Bilibili.jpg");
         label.setIcon(img);
-        panel.setBounds(125,5,150,140);
+        panel.setBounds(125, 5, 150, 140);
         frame.add(panel);
         panel.add(label);
     }
@@ -76,7 +88,7 @@ public class GUI extends JFrame {
         JLabel label = new JLabel();
         ImageIcon img = new ImageIcon("./data/Tick.jpg");
         label.setIcon(img);
-        panel.setBounds(150,35,100,100);
+        panel.setBounds(150, 35, 100, 100);
         frame.add(panel);
         panel.add(label);
     }
@@ -86,7 +98,7 @@ public class GUI extends JFrame {
         JLabel label = new JLabel();
         ImageIcon img = new ImageIcon("./data/Cross.jpg");
         label.setIcon(img);
-        panel.setBounds(150,35,100,100);
+        panel.setBounds(150, 35, 100, 100);
         frame.add(panel);
         panel.add(label);
     }
@@ -135,12 +147,12 @@ public class GUI extends JFrame {
         JPanel genrePanel = new JPanel();
         JLabel genreLabel = new JLabel("Genre:");
         genreComboBox = new JComboBox(genres);
-        genrePanel.setBounds(125,80,140,55);
+        genrePanel.setBounds(125, 80, 140, 55);
         genrePanel.add(genreLabel);
         genrePanel.add(genreComboBox);
 
         JButton searchButton = searchButton();
-        searchButton.setBounds(270,102,35,35);
+        searchButton.setBounds(270, 102, 35, 35);
 
         searchGenreFrame.add(genrePanel);
         searchGenreFrame.add(searchButton);
@@ -156,12 +168,12 @@ public class GUI extends JFrame {
         genreResult.setLayout(null);
 
         JScrollPane scroll = new JScrollPane();
-        scroll.setBounds(25,25,350,225);
+        scroll.setBounds(25, 25, 350, 225);
 
         JTextArea movies = new JTextArea();
         movies.setLineWrap(true);
         movies.setWrapStyleWord(true);
-        movies.setBounds(25,25,350,225);
+        movies.setBounds(25, 25, 350, 225);
         selectedGenre = genreComboBox.getSelectedItem().toString();
         ArrayList<String> names = listOperation.printMoviesOfGivenGenre(selectedGenre);
         for (String name : names) {
@@ -182,13 +194,13 @@ public class GUI extends JFrame {
         JPanel namePanel = new JPanel();
         JLabel nameLabel = new JLabel("Movie Name:");
         searchName = new JTextField(20);
-        searchName.setBounds(75,80,250,30);
-        namePanel.setBounds(75,80,250,60);
+        searchName.setBounds(75, 80, 250, 30);
+        namePanel.setBounds(75, 80, 250, 60);
         namePanel.add(nameLabel);
         namePanel.add(searchName);
 
         JButton searchButton = searchButton();
-        searchButton.setBounds(325,102,35,35);
+        searchButton.setBounds(325, 102, 35, 35);
 
         searchMovieFrame.add(namePanel);
         searchMovieFrame.add(searchButton);
@@ -205,7 +217,7 @@ public class GUI extends JFrame {
         movieFrame.setLayout(null);
 
         JScrollPane scroll = new JScrollPane();
-        scroll.setBounds(25,25,350,100);
+        scroll.setBounds(25, 25, 350, 100);
         JTextArea movieInfo = searchName();
 
         JButton addToWatchlist = new JButton("Add to Watchlist");
@@ -225,7 +237,7 @@ public class GUI extends JFrame {
 
     private static JTextArea searchName() {
         JTextArea movieInfo = new JTextArea();
-        movieInfo.setBounds(25,75,350,40);
+        movieInfo.setBounds(25, 75, 350, 40);
         movieInfo.setLineWrap(true);
         movieInfo.setWrapStyleWord(true);
         String info = listOperation.searchMovie(searchName.getText()).printInfo();
@@ -268,8 +280,8 @@ public class GUI extends JFrame {
         JPanel namePanel = namePanel();
         JPanel datePanel = datePanel();
         JPanel genrePanel = genreCheckBoxPanel();
-        JButton uploadButton  = uploadButton();
-        uploadButton.setBounds(312,242,35,35);
+        JButton uploadButton = uploadButton();
+        uploadButton.setBounds(312, 242, 35, 35);
 
         uploadMovieFrame.add(typePanel);
         uploadMovieFrame.add(namePanel);
@@ -283,9 +295,9 @@ public class GUI extends JFrame {
     public static JPanel typePanel() {
         JPanel typePanel = new JPanel();
         JLabel typeLabel = new JLabel("Type:");
-        String []type = {"Public", "Upcoming"};
+        String[] type = {"Public", "Upcoming"};
         typeComboBox = new JComboBox(type);
-        typePanel.setBounds(50,5,300,28);
+        typePanel.setBounds(50, 5, 300, 28);
         typePanel.add(typeLabel);
         typePanel.add(typeComboBox);
         return typePanel;
@@ -295,7 +307,7 @@ public class GUI extends JFrame {
         JPanel namePanel = new JPanel();
         JLabel nameLabel = new JLabel("Name:");
         enterName = new JTextField(20);
-        namePanel.setBounds(50,33,300,28);
+        namePanel.setBounds(50, 33, 300, 28);
         namePanel.add(nameLabel);
         namePanel.add(enterName);
         return namePanel;
@@ -305,7 +317,7 @@ public class GUI extends JFrame {
         JPanel datePanel = new JPanel();
         JLabel dateLabel = new JLabel("Release Date (yyyy-mm-dd):");
         enterDate = new JTextField(8);
-        datePanel.setBounds(50,61,300,28);
+        datePanel.setBounds(50, 61, 300, 28);
         datePanel.add(dateLabel);
         datePanel.add(enterDate);
         return datePanel;
@@ -319,7 +331,7 @@ public class GUI extends JFrame {
             JCheckBox genreCheckBox = new JCheckBox(s);
             genrePanel.add(genreCheckBox);
         }
-        genrePanel.setBounds(45,94,305,150);
+        genrePanel.setBounds(45, 94, 305, 150);
         return genrePanel;
     }
 
@@ -341,7 +353,7 @@ public class GUI extends JFrame {
         ArrayList<JCheckBox> checkboxes = new ArrayList<>();
         for (Component component : genrePanel.getComponents()) {
             if (component instanceof JCheckBox) {
-                checkboxes.add((JCheckBox)component);
+                checkboxes.add((JCheckBox) component);
             }
         }
         for (JCheckBox box : checkboxes) {
@@ -357,15 +369,15 @@ public class GUI extends JFrame {
         checkWatchlistFrame.setLayout(null);
 
         JScrollPane scroll = new JScrollPane();
-        scroll.setBounds(25,25,350,175);
+        scroll.setBounds(25, 25, 350, 175);
         JTextArea watchlist = new JTextArea();
-        watchlist.setBounds(25,25,350,175);
+        watchlist.setBounds(25, 25, 350, 175);
         ArrayList<String> list = listOperation.watchList.showAll();
         for (String info : list) {
             watchlist.append(info + "\n");
         }
         JButton manage = new JButton("Manage");
-        manage.setBounds(275,215,100, 35);
+        manage.setBounds(275, 215, 100, 35);
 
         scroll.setViewportView(watchlist);
         checkWatchlistFrame.add(scroll);
@@ -382,15 +394,15 @@ public class GUI extends JFrame {
         deleteFrame.setLayout(null);
 
         ArrayList<String> list = listOperation.watchList.showAll();
-        String []movie = new String[list.size()];
+        String[] movie = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             movie[i] = list.get(i);
         }
         JComboBox movieComboBox = new JComboBox(movie);
 
-        movieComboBox.setBounds(45,45,305,150);
+        movieComboBox.setBounds(45, 45, 305, 150);
         JButton delete = new JButton("Delete");
-        delete.setBounds(275,215,100, 35);
+        delete.setBounds(275, 215, 100, 35);
 
         deleteFrame.add(movieComboBox);
         deleteFrame.add(delete);
@@ -407,7 +419,7 @@ public class GUI extends JFrame {
         crossLogo(uploadFailFrame);
         JPanel repetitionPanel = new JPanel();
         JLabel repetitionLabel = new JLabel("Already uploaded");
-        repetitionPanel.setBounds(50,200,300,30);
+        repetitionPanel.setBounds(50, 200, 300, 30);
 
         repetitionPanel.add(repetitionLabel);
         uploadFailFrame.add(repetitionPanel);
@@ -424,7 +436,7 @@ public class GUI extends JFrame {
         crossLogo(downloadFailFrame);
         JPanel repetitionPanel = new JPanel();
         JLabel repetitionLabel = new JLabel("Already downloaded");
-        repetitionPanel.setBounds(50,200,300,30);
+        repetitionPanel.setBounds(50, 200, 300, 30);
 
         repetitionPanel.add(repetitionLabel);
         downloadFailFrame.add(repetitionPanel);
@@ -441,7 +453,7 @@ public class GUI extends JFrame {
         crossLogo(addFailFrame);
         JPanel repetitionPanel = new JPanel();
         JLabel repetitionLabel = new JLabel("Upcoming movie is not downloadable");
-        repetitionPanel.setBounds(50,200,300,30);
+        repetitionPanel.setBounds(50, 200, 300, 30);
 
         repetitionPanel.add(repetitionLabel);
         addFailFrame.add(repetitionPanel);
@@ -459,7 +471,7 @@ public class GUI extends JFrame {
         crossLogo(addFailFrame);
         JPanel repetitionPanel = new JPanel();
         JLabel repetitionLabel = new JLabel("Already added");
-        repetitionPanel.setBounds(50,200,300,30);
+        repetitionPanel.setBounds(50, 200, 300, 30);
 
         repetitionPanel.add(repetitionLabel);
         addFailFrame.add(repetitionPanel);
@@ -477,7 +489,7 @@ public class GUI extends JFrame {
         tickLogo(uploadSuccessFrame);
         JPanel successPanel = new JPanel();
         JLabel successLabel = new JLabel("Upload successfully");
-        successPanel.setBounds(50,200,300,30);
+        successPanel.setBounds(50, 200, 300, 30);
 
         successPanel.add(successLabel);
         uploadSuccessFrame.add(successPanel);
@@ -494,7 +506,7 @@ public class GUI extends JFrame {
         tickLogo(downloadSuccessFrame);
         JPanel successPanel = new JPanel();
         JLabel successLabel = new JLabel("download successfully");
-        successPanel.setBounds(50,200,300,30);
+        successPanel.setBounds(50, 200, 300, 30);
 
         successPanel.add(successLabel);
         downloadSuccessFrame.add(successPanel);
@@ -511,7 +523,7 @@ public class GUI extends JFrame {
         tickLogo(addSuccessFrame);
         JPanel successPanel = new JPanel();
         JLabel successLabel = new JLabel("Add successfully");
-        successPanel.setBounds(50,200,300,30);
+        successPanel.setBounds(50, 200, 300, 30);
 
         successPanel.add(successLabel);
         addSuccessFrame.add(successPanel);
