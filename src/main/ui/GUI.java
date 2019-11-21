@@ -14,10 +14,18 @@ public class GUI extends JFrame {
 
     static ListOperation listOperation;
     static JFrame mainFrame;
+    static JFrame searchFrame;
+    static JFrame searchGenreFrame;
+    static JFrame searchMovieFrame;
+    static JFrame movieFrame;
+    static JFrame uploadMovieFrame;
+    static JFrame checkWatchlistFrame;
+    static JFrame deleteFrame;
     static String selectedGenre = "";
     static JTextField searchName;
     static JComboBox genreComboBox;
     static JComboBox typeComboBox;
+    static JComboBox movieComboBox;
     static JTextField enterName;
     static JTextField enterDate;
     static JPanel genrePanel;
@@ -61,62 +69,20 @@ public class GUI extends JFrame {
         search.addActionListener(e -> search());
         upload.addActionListener(e -> uploadMovie());
         checkWatchlist.addActionListener(e -> checkWatchlist());
-        exit.addActionListener(e -> saveAndExit());
+        exit.addActionListener(e -> saveAndClose(mainFrame));
     }
 
-    static void saveAndExit() {
+    private static void saveAndClose(JFrame frame) {
         try {
             listOperation.saveAll();
-            mainFrame.dispose();
+            frame.dispose();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void bilibiliLogo(JFrame frame) {
-        JPanel panel = new JPanel();
-        JLabel label = new JLabel();
-        ImageIcon img = new ImageIcon("./data/Bilibili.jpg");
-        label.setIcon(img);
-        panel.setBounds(125, 5, 150, 140);
-        frame.add(panel);
-        panel.add(label);
-    }
-
-    private static void tickLogo(JFrame frame) {
-        JPanel panel = new JPanel();
-        JLabel label = new JLabel();
-        ImageIcon img = new ImageIcon("./data/Tick.jpg");
-        label.setIcon(img);
-        panel.setBounds(150, 35, 100, 100);
-        frame.add(panel);
-        panel.add(label);
-    }
-
-    private static void crossLogo(JFrame frame) {
-        JPanel panel = new JPanel();
-        JLabel label = new JLabel();
-        ImageIcon img = new ImageIcon("./data/Cross.jpg");
-        label.setIcon(img);
-        panel.setBounds(150, 35, 100, 100);
-        frame.add(panel);
-        panel.add(label);
-    }
-
-    private static JButton searchButton() {
-        JButton searchButton = new JButton();
-        searchButton.setIcon(new ImageIcon("./data/SearchLogo.jpg"));
-        return searchButton;
-    }
-
-    private static JButton uploadButton() {
-        JButton uploadButton = new JButton();
-        uploadButton.setIcon(new ImageIcon("./data/UploadLogo.jpg"));
-        return uploadButton;
-    }
-
     private static void search() {
-        JFrame searchFrame = new JFrame("Search");
+        searchFrame = new JFrame("Search");
         searchFrame.setBounds(200, 200, 400, 300);
         searchFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -138,7 +104,7 @@ public class GUI extends JFrame {
     }
 
     private static void searchGenre() {
-        JFrame searchGenreFrame = new JFrame("Search Genre");
+        searchGenreFrame = new JFrame("Search Genre");
         searchGenreFrame.setBounds(200, 200, 400, 300);
         searchGenreFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -170,10 +136,7 @@ public class GUI extends JFrame {
         JScrollPane scroll = new JScrollPane();
         scroll.setBounds(25, 25, 350, 225);
 
-        JTextArea movies = new JTextArea();
-        movies.setLineWrap(true);
-        movies.setWrapStyleWord(true);
-        movies.setBounds(25, 25, 350, 225);
+        JTextArea movies = movieInfo();
         selectedGenre = genreComboBox.getSelectedItem().toString();
         ArrayList<String> names = listOperation.printMoviesOfGivenGenre(selectedGenre);
         for (String name : names) {
@@ -182,10 +145,20 @@ public class GUI extends JFrame {
         scroll.setViewportView(movies);
         genreResult.add(scroll);
         genreResult.setVisible(true);
+        saveAndClose(searchGenreFrame);
+        saveAndClose(searchFrame);
+    }
+
+    private static JTextArea movieInfo() {
+        JTextArea movies = new JTextArea();
+        movies.setLineWrap(true);
+        movies.setWrapStyleWord(true);
+        movies.setBounds(25, 25, 350, 225);
+        return movies;
     }
 
     private static void searchMovie() {
-        JFrame searchMovieFrame = new JFrame("Search Movie");
+        searchMovieFrame = new JFrame("Search Movie");
         searchMovieFrame.setBounds(200, 200, 400, 300);
         searchMovieFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -210,7 +183,7 @@ public class GUI extends JFrame {
     }
 
     private static void searchMovieResult() {
-        JFrame movieFrame = new JFrame("Movie");
+        movieFrame = new JFrame("Movie");
         movieFrame.setBounds(200, 200, 400, 300);
         movieFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -252,25 +225,33 @@ public class GUI extends JFrame {
     private static void doAddToWatchlist() {
         try {
             listOperation.watchList.add(listOperation.searchMovie(searchName.getText()));
-            addSuccess();
+            success("Add");
         } catch (RepetitionException | UpcomingException e) {
-            addFail();
+            fail("added");
+        } finally {
+            saveAndClose(movieFrame);
+            saveAndClose(searchMovieFrame);
+            saveAndClose(searchFrame);
         }
     }
 
     private static void doDownload() {
         try {
             listOperation.downloadList.add(listOperation.searchMovie(searchName.getText()));
-            downloadSuccess();
+            success("Download");
         } catch (RepetitionException e) {
-            downloadFail();
+            fail("downloaded");
         } catch (UpcomingException e) {
-            upcoming();
+            fail("Upcoming movie is not downloadable");
+        } finally {
+            saveAndClose(movieFrame);
+            saveAndClose(searchMovieFrame);
+            saveAndClose(searchFrame);
         }
     }
 
     private static void uploadMovie() {
-        JFrame uploadMovieFrame = new JFrame("Upload Movie");
+        uploadMovieFrame = new JFrame("Upload Movie");
         uploadMovieFrame.setBounds(200, 200, 400, 300);
         uploadMovieFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -292,7 +273,7 @@ public class GUI extends JFrame {
         uploadButton.addActionListener(e -> doUpload());
     }
 
-    public static JPanel typePanel() {
+    private static JPanel typePanel() {
         JPanel typePanel = new JPanel();
         JLabel typeLabel = new JLabel("Type:");
         String[] type = {"Public", "Upcoming"};
@@ -339,9 +320,11 @@ public class GUI extends JFrame {
         newMovie();
         try {
             listOperation.cinemaList.add(listOperation.movieOperation.movie);
-            uploadSuccess();
+            success("Upload");
         } catch (RepetitionException | UpcomingException e) {
-            uploadFail();
+            fail("uploaded");
+        } finally {
+            saveAndClose(uploadMovieFrame);
         }
     }
 
@@ -353,16 +336,18 @@ public class GUI extends JFrame {
         ArrayList<JCheckBox> checkboxes = new ArrayList<>();
         for (Component component : genrePanel.getComponents()) {
             if (component instanceof JCheckBox) {
-                checkboxes.add((JCheckBox) component);
+                if (((JCheckBox) component).isSelected()) {
+                    checkboxes.add((JCheckBox) component);
+                }
             }
         }
-        for (JCheckBox box : checkboxes) {
-            listOperation.movieOperation.movie.addGenre(new Genre(box.getText()));
+        for (JCheckBox selectedBox : checkboxes) {
+            listOperation.movieOperation.movie.addGenre(new Genre(selectedBox.getText()));
         }
     }
 
     private static void checkWatchlist() {
-        JFrame checkWatchlistFrame = new JFrame("Check Watchlist");
+        checkWatchlistFrame = new JFrame("Check Watchlist");
         checkWatchlistFrame.setBounds(200, 200, 400, 300);
         checkWatchlistFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -370,12 +355,7 @@ public class GUI extends JFrame {
 
         JScrollPane scroll = new JScrollPane();
         scroll.setBounds(25, 25, 350, 175);
-        JTextArea watchlist = new JTextArea();
-        watchlist.setBounds(25, 25, 350, 175);
-        ArrayList<String> list = listOperation.watchList.showAll();
-        for (String info : list) {
-            watchlist.append(info + "\n");
-        }
+        JTextArea watchlist = showWatchlist();
         JButton manage = new JButton("Manage");
         manage.setBounds(275, 215, 100, 35);
 
@@ -386,8 +366,18 @@ public class GUI extends JFrame {
         manage.addActionListener(e -> delete());
     }
 
+    private static JTextArea showWatchlist() {
+        JTextArea watchlist = new JTextArea();
+        watchlist.setBounds(25, 25, 350, 175);
+        ArrayList<String> list = listOperation.watchList.showAll();
+        for (String info : list) {
+            watchlist.append(info + "\n");
+        }
+        return watchlist;
+    }
+
     private static void delete() {
-        JFrame deleteFrame = new JFrame("Delete");
+        deleteFrame = new JFrame("Delete");
         deleteFrame.setBounds(200, 200, 400, 300);
         deleteFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -398,8 +388,7 @@ public class GUI extends JFrame {
         for (int i = 0; i < list.size(); i++) {
             movie[i] = list.get(i);
         }
-        JComboBox movieComboBox = new JComboBox(movie);
-
+        movieComboBox = new JComboBox(movie);
         movieComboBox.setBounds(45, 45, 305, 150);
         JButton delete = new JButton("Delete");
         delete.setBounds(275, 215, 100, 35);
@@ -407,79 +396,86 @@ public class GUI extends JFrame {
         deleteFrame.add(movieComboBox);
         deleteFrame.add(delete);
         deleteFrame.setVisible(true);
+        delete.addActionListener(e -> doDelete());
     }
 
-    private static void uploadFail() {
-        JFrame uploadFailFrame = new JFrame("Fail");
-        uploadFailFrame.setBounds(200, 200, 400, 300);
-        uploadFailFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        uploadFailFrame.setLayout(null);
-
-        crossLogo(uploadFailFrame);
-        JPanel repetitionPanel = new JPanel();
-        JLabel repetitionLabel = new JLabel("Already uploaded");
-        repetitionPanel.setBounds(50, 200, 300, 30);
-
-        repetitionPanel.add(repetitionLabel);
-        uploadFailFrame.add(repetitionPanel);
-        uploadFailFrame.setVisible(true);
+    private static void doDelete() {
+        String movieInfo = movieComboBox.getSelectedItem().toString();
+        String[] splitInfo = movieInfo.split("---");
+        String nameInfo = splitInfo[0];
+        String[] split = nameInfo.split(":");
+        String movieName = split[1];
+        listOperation.watchList.delete(movieName);
+        success("Delete");
+        saveAndClose(deleteFrame);
+        saveAndClose(checkWatchlistFrame);
     }
 
-    private static void downloadFail() {
-        JFrame downloadFailFrame = new JFrame("Fail");
-        downloadFailFrame.setBounds(200, 200, 400, 300);
-        downloadFailFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        downloadFailFrame.setLayout(null);
-
-        crossLogo(downloadFailFrame);
-        JPanel repetitionPanel = new JPanel();
-        JLabel repetitionLabel = new JLabel("Already downloaded");
-        repetitionPanel.setBounds(50, 200, 300, 30);
-
-        repetitionPanel.add(repetitionLabel);
-        downloadFailFrame.add(repetitionPanel);
-        downloadFailFrame.setVisible(true);
+    private static void bilibiliLogo(JFrame frame) {
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel();
+        ImageIcon img = new ImageIcon("./data/Bilibili.jpg");
+        label.setIcon(img);
+        panel.setBounds(125, 5, 150, 140);
+        frame.add(panel);
+        panel.add(label);
     }
 
-    private static void upcoming() {
-        JFrame addFailFrame = new JFrame("Fail");
-        addFailFrame.setBounds(200, 200, 400, 300);
-        addFailFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        addFailFrame.setLayout(null);
-
-        crossLogo(addFailFrame);
-        JPanel repetitionPanel = new JPanel();
-        JLabel repetitionLabel = new JLabel("Upcoming movie is not downloadable");
-        repetitionPanel.setBounds(50, 200, 300, 30);
-
-        repetitionPanel.add(repetitionLabel);
-        addFailFrame.add(repetitionPanel);
-
-        addFailFrame.setVisible(true);
+    private static void tickLogo(JFrame frame) {
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel();
+        ImageIcon img = new ImageIcon("./data/Tick.jpg");
+        label.setIcon(img);
+        panel.setBounds(150, 35, 100, 100);
+        frame.add(panel);
+        panel.add(label);
     }
 
-    private static void addFail() {
-        JFrame addFailFrame = new JFrame("Fail");
-        addFailFrame.setBounds(200, 200, 400, 300);
-        addFailFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        addFailFrame.setLayout(null);
-
-        crossLogo(addFailFrame);
-        JPanel repetitionPanel = new JPanel();
-        JLabel repetitionLabel = new JLabel("Already added");
-        repetitionPanel.setBounds(50, 200, 300, 30);
-
-        repetitionPanel.add(repetitionLabel);
-        addFailFrame.add(repetitionPanel);
-
-        addFailFrame.setVisible(true);
+    private static void crossLogo(JFrame frame) {
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel();
+        ImageIcon img = new ImageIcon("./data/Cross.jpg");
+        label.setIcon(img);
+        panel.setBounds(150, 35, 100, 100);
+        frame.add(panel);
+        panel.add(label);
     }
 
-    private static void uploadSuccess() {
+    private static JButton searchButton() {
+        JButton searchButton = new JButton();
+        searchButton.setIcon(new ImageIcon("./data/SearchLogo.jpg"));
+        return searchButton;
+    }
+
+    private static JButton uploadButton() {
+        JButton uploadButton = new JButton();
+        uploadButton.setIcon(new ImageIcon("./data/UploadLogo.jpg"));
+        return uploadButton;
+    }
+
+    private static void fail(String s) {
+        JFrame fail = new JFrame("Fail");
+        fail.setBounds(200, 200, 400, 300);
+        fail.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        fail.setLayout(null);
+
+        crossLogo(fail);
+        JLabel failLabel;
+        JPanel failPanel = new JPanel();
+        if (s.equals("Upcoming movie is not downloadable")) {
+            failLabel = new JLabel(s);
+        } else {
+            failLabel = new JLabel("Already " + s);
+        }
+        failPanel.setBounds(50, 200, 300, 30);
+
+        failPanel.add(failLabel);
+        fail.add(failPanel);
+        fail.setVisible(true);
+    }
+
+    private static void success(String s) {
         JFrame uploadSuccessFrame = new JFrame("Success");
         uploadSuccessFrame.setBounds(200, 200, 400, 300);
         uploadSuccessFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -488,45 +484,11 @@ public class GUI extends JFrame {
 
         tickLogo(uploadSuccessFrame);
         JPanel successPanel = new JPanel();
-        JLabel successLabel = new JLabel("Upload successfully");
+        JLabel successLabel = new JLabel(s + " successfully");
         successPanel.setBounds(50, 200, 300, 30);
 
         successPanel.add(successLabel);
         uploadSuccessFrame.add(successPanel);
         uploadSuccessFrame.setVisible(true);
-    }
-
-    private static void downloadSuccess() {
-        JFrame downloadSuccessFrame = new JFrame("Success");
-        downloadSuccessFrame.setBounds(200, 200, 400, 300);
-        downloadSuccessFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        downloadSuccessFrame.setLayout(null);
-
-        tickLogo(downloadSuccessFrame);
-        JPanel successPanel = new JPanel();
-        JLabel successLabel = new JLabel("download successfully");
-        successPanel.setBounds(50, 200, 300, 30);
-
-        successPanel.add(successLabel);
-        downloadSuccessFrame.add(successPanel);
-        downloadSuccessFrame.setVisible(true);
-    }
-
-    private static void addSuccess() {
-        JFrame addSuccessFrame = new JFrame("Success");
-        addSuccessFrame.setBounds(200, 200, 400, 300);
-        addSuccessFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        addSuccessFrame.setLayout(null);
-
-        tickLogo(addSuccessFrame);
-        JPanel successPanel = new JPanel();
-        JLabel successLabel = new JLabel("Add successfully");
-        successPanel.setBounds(50, 200, 300, 30);
-
-        successPanel.add(successLabel);
-        addSuccessFrame.add(successPanel);
-        addSuccessFrame.setVisible(true);
     }
 }
