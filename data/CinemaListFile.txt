@@ -16,3 +16,6 @@ Zootopia,Public,2016-03-04,Animation Comedy Adventure
 Mulan,Upcoming,2020-03-27,Action Adventure Drama
 Onward,Upcoming,2020-03-06,Adventure Animation Comedy
 The King's Man,Upcoming,2020-02-14,Action Adventure Comedy
+Birds Of Prey,Upcoming,2020-02-07,Action Crime
+Coco,Public,2017-11-24,Adventure Animation Family
+Joker,Public,2019-10-04,Crime Drama

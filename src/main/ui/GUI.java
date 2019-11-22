@@ -3,7 +3,6 @@ package ui;
 import exception.RepetitionException;
 import exception.UpcomingException;
 import model.Genre;
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -12,23 +11,22 @@ import java.util.Arrays;
 
 public class GUI extends JFrame {
 
-    static ListOperation listOperation;
-    static JFrame mainFrame;
-    static JFrame searchFrame;
-    static JFrame searchGenreFrame;
-    static JFrame searchMovieFrame;
-    static JFrame movieFrame;
-    static JFrame uploadMovieFrame;
-    static JFrame checkWatchlistFrame;
-    static JFrame deleteFrame;
-    static String selectedGenre = "";
-    static JTextField searchName;
-    static JComboBox genreComboBox;
-    static JComboBox typeComboBox;
-    static JComboBox movieComboBox;
-    static JTextField enterName;
-    static JTextField enterDate;
-    static JPanel genrePanel;
+    private static ListOperation listOperation;
+    private static JFrame mainFrame;
+    private static JFrame searchFrame;
+    private static JFrame searchGenreFrame;
+    private static JFrame searchMovieFrame;
+    private static JFrame movieResultFrame;
+    private static JFrame uploadMovieFrame;
+    private static JFrame checkWatchlistFrame;
+    private static JFrame deleteFrame;
+    private static JTextField searchName;
+    private static JComboBox genreComboBox;
+    private static JComboBox typeComboBox;
+    private static JComboBox movieComboBox;
+    private static JTextField enterName;
+    private static JTextField enterDate;
+    private static JPanel genrePanel;
 
     private static String[] genres = {"Action", "Adventure", "Animation", "Crime", "Comedy", "Drama", "Family",
             "Fantasy", "Horror", "Mystery", "Romance", "SciFi", "Superhero", "Other"};
@@ -36,19 +34,18 @@ public class GUI extends JFrame {
     public static void main(String[] args) throws IOException {
         listOperation = new ListOperation();
         listOperation.start();
-        javax.swing.SwingUtilities.invokeLater(() -> createAndShowGUI());
+        javax.swing.SwingUtilities.invokeLater(GUI::mainFrame);
     }
 
-    public static void createAndShowGUI() {
+    private static void mainFrame() {
         mainFrame = new JFrame("MovieSharing");
+        mainFrame.setVisible(true);
         mainFrame.setBounds(200, 200, 400, 300);
         mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         mainFrame.setLayout(null);
 
         bilibiliLogo(mainFrame);
         initialButton(mainFrame);
-
-        mainFrame.setVisible(true);
     }
 
     private static void initialButton(JFrame frame) {
@@ -65,7 +62,6 @@ public class GUI extends JFrame {
         frame.add(upload);
         frame.add(checkWatchlist);
         frame.add(exit);
-
         search.addActionListener(e -> search());
         upload.addActionListener(e -> uploadMovie());
         checkWatchlist.addActionListener(e -> checkWatchlist());
@@ -83,9 +79,9 @@ public class GUI extends JFrame {
 
     private static void search() {
         searchFrame = new JFrame("Search");
+        searchFrame.setVisible(true);
         searchFrame.setBounds(200, 200, 400, 300);
         searchFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
         searchFrame.setLayout(null);
 
         JButton searchMovie = new JButton("Search Movie");
@@ -95,19 +91,15 @@ public class GUI extends JFrame {
 
         searchFrame.add(searchMovie);
         searchFrame.add(searchGenre);
-
-        searchFrame.setVisible(true);
-
         searchGenre.addActionListener(e -> searchGenre());
-
         searchMovie.addActionListener(e -> searchMovie());
     }
 
     private static void searchGenre() {
         searchGenreFrame = new JFrame("Search Genre");
+        searchGenreFrame.setVisible(true);
         searchGenreFrame.setBounds(200, 200, 400, 300);
         searchGenreFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
         searchGenreFrame.setLayout(null);
 
         JPanel genrePanel = new JPanel();
@@ -116,35 +108,31 @@ public class GUI extends JFrame {
         genrePanel.setBounds(125, 80, 140, 55);
         genrePanel.add(genreLabel);
         genrePanel.add(genreComboBox);
-
-        JButton searchButton = searchButton();
-        searchButton.setBounds(270, 102, 35, 35);
+        JButton searchButton = searchButton(270);
 
         searchGenreFrame.add(genrePanel);
         searchGenreFrame.add(searchButton);
-        searchGenreFrame.setVisible(true);
         searchButton.addActionListener(e -> searchGenreResult());
     }
 
     private static void searchGenreResult() {
-        JFrame genreResult = new JFrame("Search Genre Result");
-        genreResult.setBounds(200, 200, 400, 300);
-        genreResult.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        genreResult.setLayout(null);
+        JFrame genreResultFrame = new JFrame("Search Genre Result");
+        genreResultFrame.setVisible(true);
+        genreResultFrame.setBounds(200, 200, 400, 300);
+        genreResultFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        genreResultFrame.setLayout(null);
 
         JScrollPane scroll = new JScrollPane();
         scroll.setBounds(25, 25, 350, 225);
-
         JTextArea movies = movieInfo();
-        selectedGenre = genreComboBox.getSelectedItem().toString();
+        String selectedGenre = genreComboBox.getSelectedItem().toString();
         ArrayList<String> names = listOperation.printMoviesOfGivenGenre(selectedGenre);
         for (String name : names) {
             movies.append(name + "\n");
         }
         scroll.setViewportView(movies);
-        genreResult.add(scroll);
-        genreResult.setVisible(true);
+        genreResultFrame.add(scroll);
+
         saveAndClose(searchGenreFrame);
         saveAndClose(searchFrame);
     }
@@ -159,9 +147,9 @@ public class GUI extends JFrame {
 
     private static void searchMovie() {
         searchMovieFrame = new JFrame("Search Movie");
+        searchMovieFrame.setVisible(true);
         searchMovieFrame.setBounds(200, 200, 400, 300);
         searchMovieFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
         searchMovieFrame.setLayout(null);
 
         JPanel namePanel = new JPanel();
@@ -171,39 +159,33 @@ public class GUI extends JFrame {
         namePanel.setBounds(75, 80, 250, 60);
         namePanel.add(nameLabel);
         namePanel.add(searchName);
-
-        JButton searchButton = searchButton();
-        searchButton.setBounds(325, 102, 35, 35);
+        JButton searchButton = searchButton(325);
 
         searchMovieFrame.add(namePanel);
         searchMovieFrame.add(searchButton);
-        searchMovieFrame.setVisible(true);
-
         searchButton.addActionListener(e -> searchMovieResult());
     }
 
     private static void searchMovieResult() {
-        movieFrame = new JFrame("Movie");
-        movieFrame.setBounds(200, 200, 400, 300);
-        movieFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        movieFrame.setLayout(null);
+        movieResultFrame = new JFrame("Movie");
+        movieResultFrame.setVisible(true);
+        movieResultFrame.setBounds(200, 200, 400, 300);
+        movieResultFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        movieResultFrame.setLayout(null);
 
         JScrollPane scroll = new JScrollPane();
         scroll.setBounds(25, 25, 350, 100);
         JTextArea movieInfo = searchName();
+        scroll.setViewportView(movieInfo);
 
         JButton addToWatchlist = new JButton("Add to Watchlist");
         addToWatchlist.setBounds(25, 160, 150, 35);
         JButton download = new JButton("Download");
         download.setBounds(225, 160, 150, 35);
 
-        scroll.setViewportView(movieInfo);
-        movieFrame.add(scroll);
-        movieFrame.add(addToWatchlist);
-        movieFrame.add(download);
-        movieFrame.setVisible(true);
-
+        movieResultFrame.add(scroll);
+        movieResultFrame.add(addToWatchlist);
+        movieResultFrame.add(download);
         addToWatchlist.addActionListener(e -> doAddToWatchlist());
         download.addActionListener(e -> doDownload());
     }
@@ -229,7 +211,7 @@ public class GUI extends JFrame {
         } catch (RepetitionException | UpcomingException e) {
             fail("added");
         } finally {
-            saveAndClose(movieFrame);
+            saveAndClose(movieResultFrame);
             saveAndClose(searchMovieFrame);
             saveAndClose(searchFrame);
         }
@@ -244,7 +226,7 @@ public class GUI extends JFrame {
         } catch (UpcomingException e) {
             fail("Upcoming movie is not downloadable");
         } finally {
-            saveAndClose(movieFrame);
+            saveAndClose(movieResultFrame);
             saveAndClose(searchMovieFrame);
             saveAndClose(searchFrame);
         }
@@ -252,9 +234,9 @@ public class GUI extends JFrame {
 
     private static void uploadMovie() {
         uploadMovieFrame = new JFrame("Upload Movie");
+        uploadMovieFrame.setVisible(true);
         uploadMovieFrame.setBounds(200, 200, 400, 300);
         uploadMovieFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
         uploadMovieFrame.setLayout(null);
 
         JPanel typePanel = typePanel();
@@ -262,14 +244,12 @@ public class GUI extends JFrame {
         JPanel datePanel = datePanel();
         JPanel genrePanel = genreCheckBoxPanel();
         JButton uploadButton = uploadButton();
-        uploadButton.setBounds(312, 242, 35, 35);
 
         uploadMovieFrame.add(typePanel);
         uploadMovieFrame.add(namePanel);
         uploadMovieFrame.add(datePanel);
         uploadMovieFrame.add(genrePanel);
         uploadMovieFrame.add(uploadButton);
-        uploadMovieFrame.setVisible(true);
         uploadButton.addActionListener(e -> doUpload());
     }
 
@@ -348,21 +328,20 @@ public class GUI extends JFrame {
 
     private static void checkWatchlist() {
         checkWatchlistFrame = new JFrame("Check Watchlist");
+        checkWatchlistFrame.setVisible(true);
         checkWatchlistFrame.setBounds(200, 200, 400, 300);
         checkWatchlistFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
         checkWatchlistFrame.setLayout(null);
 
         JScrollPane scroll = new JScrollPane();
         scroll.setBounds(25, 25, 350, 175);
         JTextArea watchlist = showWatchlist();
+        scroll.setViewportView(watchlist);
         JButton manage = new JButton("Manage");
         manage.setBounds(275, 215, 100, 35);
 
-        scroll.setViewportView(watchlist);
         checkWatchlistFrame.add(scroll);
         checkWatchlistFrame.add(manage);
-        checkWatchlistFrame.setVisible(true);
         manage.addActionListener(e -> delete());
     }
 
@@ -378,9 +357,9 @@ public class GUI extends JFrame {
 
     private static void delete() {
         deleteFrame = new JFrame("Delete");
+        deleteFrame.setVisible(true);
         deleteFrame.setBounds(200, 200, 400, 300);
         deleteFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
         deleteFrame.setLayout(null);
 
         ArrayList<String> list = listOperation.watchList.showAll();
@@ -395,7 +374,6 @@ public class GUI extends JFrame {
 
         deleteFrame.add(movieComboBox);
         deleteFrame.add(delete);
-        deleteFrame.setVisible(true);
         delete.addActionListener(e -> doDelete());
     }
 
@@ -441,26 +419,28 @@ public class GUI extends JFrame {
         panel.add(label);
     }
 
-    private static JButton searchButton() {
+    private static JButton searchButton(int x) {
         JButton searchButton = new JButton();
         searchButton.setIcon(new ImageIcon("./data/SearchLogo.jpg"));
+        searchButton.setBounds(x, 102, 35, 35);
         return searchButton;
     }
 
     private static JButton uploadButton() {
         JButton uploadButton = new JButton();
         uploadButton.setIcon(new ImageIcon("./data/UploadLogo.jpg"));
+        uploadButton.setBounds(312, 242, 35, 35);
         return uploadButton;
     }
 
     private static void fail(String s) {
-        JFrame fail = new JFrame("Fail");
-        fail.setBounds(200, 200, 400, 300);
-        fail.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        JFrame failFrame = new JFrame("Fail");
+        failFrame.setVisible(true);
+        failFrame.setBounds(200, 200, 400, 300);
+        failFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        failFrame.setLayout(null);
 
-        fail.setLayout(null);
-
-        crossLogo(fail);
+        crossLogo(failFrame);
         JLabel failLabel;
         JPanel failPanel = new JPanel();
         if (s.equals("Upcoming movie is not downloadable")) {
@@ -471,24 +451,22 @@ public class GUI extends JFrame {
         failPanel.setBounds(50, 200, 300, 30);
 
         failPanel.add(failLabel);
-        fail.add(failPanel);
-        fail.setVisible(true);
+        failFrame.add(failPanel);
     }
 
     private static void success(String s) {
-        JFrame uploadSuccessFrame = new JFrame("Success");
-        uploadSuccessFrame.setBounds(200, 200, 400, 300);
-        uploadSuccessFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        JFrame successFrame = new JFrame("Success");
+        successFrame.setVisible(true);
+        successFrame.setBounds(200, 200, 400, 300);
+        successFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        successFrame.setLayout(null);
 
-        uploadSuccessFrame.setLayout(null);
-
-        tickLogo(uploadSuccessFrame);
+        tickLogo(successFrame);
         JPanel successPanel = new JPanel();
         JLabel successLabel = new JLabel(s + " successfully");
         successPanel.setBounds(50, 200, 300, 30);
 
         successPanel.add(successLabel);
-        uploadSuccessFrame.add(successPanel);
-        uploadSuccessFrame.setVisible(true);
+        successFrame.add(successPanel);
     }
 }
