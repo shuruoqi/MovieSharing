@@ -8,6 +8,9 @@ public class CinemaList extends MovieList {
     public Movie movie;
     public HashMap<Genre, ArrayList<Movie>> genreMap = new HashMap<>();
 
+    //MODIFIES: this
+    //EFFECTS: If the genreMap contains all the genres of the given movie, add the given movie to all its genres' lists.
+    //         Otherwise, put the non-included genre and the given movie into the genreMap
     public void updateMap(Movie movie) {
         for (Genre genre : movie.getGenres()) {
             if (genreMap.containsKey(genre)) {
@@ -20,6 +23,8 @@ public class CinemaList extends MovieList {
     }
 
     @Override
+    //MODIFIES: this
+    //EFFECTS: load all the movies into the genreMap
     public void load() throws IOException {
         movies = load.load("./data/CinemaListFile.txt");
         for (Movie movie : movies) {
@@ -28,6 +33,7 @@ public class CinemaList extends MovieList {
     }
 
     @Override
+    //EFFECTS: save all the movies from the genreMap
     public void save() throws IOException {
         save.save(movies, "./data/CinemaListFile.txt");
     }

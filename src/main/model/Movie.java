@@ -39,6 +39,8 @@ public abstract class Movie {
         return date;
     }
 
+    //MODIFIES: this
+    //EFFECTS: if the genre list doesn't contain the given genre, then add it to the list. Otherwise, do nothing
     public void addGenre(Genre genre) {
         if (!this.genres.contains(genre)) {
             genres.add(genre);
@@ -50,6 +52,7 @@ public abstract class Movie {
         return genres;
     }
 
+    //EFFECTS: produce the name of all genres in the genre list
     public String getAllGenresName() {
         String nameLine = "";
         for (Genre genre : genres) {

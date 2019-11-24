@@ -48,7 +48,7 @@ public class MovieOperation {
         chooseTypeResult(type);
     }
 
-    public void chooseTypeResult(String type) {
+    void chooseTypeResult(String type) {
         if (type.equals("Public")) {
             movie = new PublicMovie();
         } else if (type.equals("Upcoming")) {

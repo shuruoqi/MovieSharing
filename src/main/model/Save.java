@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Save {
 
+    //EFFECTS: save all the movies in the movie list to the given file
     public void save(ArrayList<Movie> movies, String textFile) throws IOException {
         PrintWriter writer = new PrintWriter(textFile, "UTF-8");
         for (Movie m : movies) {

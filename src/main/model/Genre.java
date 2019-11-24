@@ -20,6 +20,8 @@ public class Genre {
         return name;
     }
 
+    //EFFECTS: If the movie list doesn't contain the given movie, add the movie to the movie list and add this genre to
+    //         the given movie. Otherwise, do nothing
     public void addMovie(Movie movie) {
         if (!movies.contains(movie)) {
             movies.add(movie);

@@ -12,6 +12,8 @@ public class Load {
 
     public ArrayList<Movie> movies;
 
+    //EFFECTS: load all the movies into the movie list
+    //MODIFIES: this
     public ArrayList<Movie> load(String textFile) throws IOException {
         movies = new ArrayList<>();
         List<String> lines = Files.readAllLines(Paths.get(textFile));

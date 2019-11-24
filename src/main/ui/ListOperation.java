@@ -18,13 +18,13 @@ public class ListOperation {
     private Scanner scanner;
 
     void start() throws IOException {
-        boolean loopState = true;
+//        boolean loopState = true;
 //        menu = new Menu();
         movieOperation = new MovieOperation();
         cinemaList = new CinemaList();
         watchList = new WatchList();
         downloadList = new DownloadList();
-        scanner = new Scanner(System.in);
+//        scanner = new Scanner(System.in);
 
         loadAll();
 //        System.out.println("Welcome!");
@@ -51,7 +51,7 @@ public class ListOperation {
         return evaluate(menu.getChoice());
     }
 
-    public boolean evaluate(int choice) throws UpcomingException, RepetitionException {
+    private boolean evaluate(int choice) throws UpcomingException, RepetitionException {
         if (choice == 1) {
             watchList.showAll();
         } else if (choice == 2) {
@@ -80,7 +80,7 @@ public class ListOperation {
         printSuccess(operation);
     }
 
-    public Movie searchMovie(String name) {
+    Movie searchMovie(String name) {
         Movie movie = cinemaList.getMovie(name);
         return movie;
     }
@@ -93,7 +93,7 @@ public class ListOperation {
         System.out.println(operation + " successfully");
     }
 
-    public void addMovie() throws UpcomingException, RepetitionException {
+    private void addMovie() throws UpcomingException, RepetitionException {
         String operation = "add";
 //        printQuestion(operation);
 //        try {
@@ -124,7 +124,7 @@ public class ListOperation {
         }
     }
 
-    public void upload() throws RepetitionException, UpcomingException {
+    private void upload() throws RepetitionException, UpcomingException {
         String operation = "upload";
 //        try {
         movieOperation.identifyType();
@@ -136,7 +136,7 @@ public class ListOperation {
 //        }
     }
 
-    public ArrayList<String> printMoviesOfGivenGenre(String genreName) {
+    ArrayList<String> printMoviesOfGivenGenre(String genreName) {
         ArrayList<String> result = new ArrayList<>();
 //        System.out.println("Which movie Genre would you like to choose?");
 //        String genreName = scanner.nextLine();
