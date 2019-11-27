@@ -32,7 +32,7 @@ public class Frame {
     private static String[] genres = {"Action", "Adventure", "Animation", "Crime", "Comedy", "Drama", "Family",
             "Fantasy", "Horror", "Mystery", "Romance", "SciFi", "Superhero", "Other"};
 
-    public void mainFrame() throws IOException {
+    void mainFrame() throws IOException {
         listOperation = new ListOperation();
         listOperation.start();
         mainFrame = new JFrame("MovieSharing");
