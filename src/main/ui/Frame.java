@@ -403,6 +403,7 @@ public class Frame {
         JPanel panel = new JPanel();
         JLabel label = new JLabel();
         ImageIcon img = new ImageIcon("./data/Bilibili.jpg");
+//        https://github.com/FortAwesome/Font-Awesome/issues/9789
         label.setIcon(img);
         panel.setBounds(125, 5, 150, 140);
         frame.add(panel);
@@ -413,6 +414,7 @@ public class Frame {
         JPanel panel = new JPanel();
         JLabel label = new JLabel();
         ImageIcon img = new ImageIcon("./data/Tick.jpg");
+//        https://www.shutterstock.com/zh/image-vector/tick-cross-signs-green-checkmark-ok-481729720
         label.setIcon(img);
         panel.setBounds(150, 35, 100, 100);
         frame.add(panel);
@@ -423,6 +425,7 @@ public class Frame {
         JPanel panel = new JPanel();
         JLabel label = new JLabel();
         ImageIcon img = new ImageIcon("./data/Cross.jpg");
+//        https://www.shutterstock.com/zh/image-vector/tick-cross-signs-green-checkmark-ok-481729720
         label.setIcon(img);
         panel.setBounds(150, 35, 100, 100);
         frame.add(panel);
@@ -432,6 +435,7 @@ public class Frame {
     private JButton searchButton(int x) {
         JButton searchButton = new JButton();
         searchButton.setIcon(new ImageIcon("./data/SearchLogo.jpg"));
+//        https://www.google.com/imgres?imgurl=https%3A%2F%2Fimage.flaticon.com%2Ficons%2Fpng%2F512%2F212%2Fpremium%2F212375.png&imgrefurl=https%3A%2F%2Fwww.flaticon.com%2Fpremium-icon%2Fmagnifying-glass_212375&docid=aACH-loEsIUEeM&tbnid=xRZdHYEFBtYe2M%3A&vet=10ahUKEwjLsIP2xonmAhVCMH0KHYGaDKEQMwgsKAAwAA..i&w=512&h=512&itg=1&hl=zh-CN&bih=657&biw=1152&q=%E6%94%BE%E5%A4%A7%E9%95%9C&ved=0ahUKEwjLsIP2xonmAhVCMH0KHYGaDKEQMwgsKAAwAA&iact=mrc&uact=8
         searchButton.setBounds(x, 102, 35, 35);
         return searchButton;
     }
@@ -439,6 +443,7 @@ public class Frame {
     private JButton uploadButton() {
         JButton uploadButton = new JButton();
         uploadButton.setIcon(new ImageIcon("./data/UploadLogo.jpg"));
+//        http://clipartfinders.com/category/quickbooks-file-png_Y2Y9cXVpY2tib29rcy1maWxlLXBuZw
         uploadButton.setBounds(312, 242, 35, 35);
         return uploadButton;
     }
