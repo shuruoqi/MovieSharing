@@ -39,6 +39,7 @@ public class Frame {
         mainFrame.setBounds(200, 200, 400, 300);
         mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         mainFrame.setLayout(null);
+        mainFrame.setResizable(false);
 
         bilibiliLogo(mainFrame);
         initialButton(mainFrame);
@@ -79,6 +80,7 @@ public class Frame {
         searchFrame.setBounds(200, 200, 400, 300);
         searchFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         searchFrame.setLayout(null);
+        searchFrame.setResizable(false);
 
         JButton searchMovie = new JButton("Search Movie");
         searchMovie.setBounds(125, 80, 150, 50);
@@ -97,6 +99,7 @@ public class Frame {
         searchGenreFrame.setBounds(200, 200, 400, 300);
         searchGenreFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         searchGenreFrame.setLayout(null);
+        searchGenreFrame.setResizable(false);
 
         JPanel genrePanel = new JPanel();
         JLabel genreLabel = new JLabel("Genre:");
@@ -117,6 +120,7 @@ public class Frame {
         genreResultFrame.setBounds(200, 200, 400, 300);
         genreResultFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         genreResultFrame.setLayout(null);
+        genreResultFrame.setResizable(false);
 
         JScrollPane scroll = new JScrollPane();
         scroll.setBounds(25, 25, 350, 225);
@@ -147,6 +151,7 @@ public class Frame {
         searchMovieFrame.setBounds(200, 200, 400, 300);
         searchMovieFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         searchMovieFrame.setLayout(null);
+        searchMovieFrame.setResizable(false);
 
         JPanel namePanel = new JPanel();
         JLabel nameLabel = new JLabel("Movie Name:");
@@ -168,12 +173,9 @@ public class Frame {
         movieResultFrame.setBounds(200, 200, 400, 300);
         movieResultFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         movieResultFrame.setLayout(null);
+        movieResultFrame.setResizable(false);
 
-        JScrollPane scroll = new JScrollPane();
-        scroll.setBounds(25, 25, 350, 100);
-        JTextArea movieInfo = searchName();
-        scroll.setViewportView(movieInfo);
-
+        JScrollPane scroll = movieInfoScroll();
         JButton addToWatchlist = new JButton("Add to Watchlist");
         addToWatchlist.setBounds(25, 160, 150, 35);
         JButton download = new JButton("Download");
@@ -185,6 +187,14 @@ public class Frame {
         addToWatchlist.addActionListener(e -> doAddToWatchlist());
         download.addActionListener(e -> doDownload());
         movieResultFrame.setVisible(true);
+    }
+
+    private JScrollPane movieInfoScroll() {
+        JScrollPane scroll = new JScrollPane();
+        scroll.setBounds(25, 25, 350, 100);
+        JTextArea movieInfo = searchName();
+        scroll.setViewportView(movieInfo);
+        return scroll;
     }
 
     private JTextArea searchName() {
@@ -234,6 +244,7 @@ public class Frame {
         uploadMovieFrame.setBounds(200, 200, 400, 300);
         uploadMovieFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         uploadMovieFrame.setLayout(null);
+        uploadMovieFrame.setResizable(false);
 
         JPanel typePanel = typePanel();
         JPanel namePanel = namePanel();
@@ -328,6 +339,7 @@ public class Frame {
         checkWatchlistFrame.setBounds(200, 200, 400, 300);
         checkWatchlistFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         checkWatchlistFrame.setLayout(null);
+        checkWatchlistFrame.setResizable(false);
 
         JScrollPane scroll = new JScrollPane();
         scroll.setBounds(25, 25, 350, 175);
@@ -357,6 +369,7 @@ public class Frame {
         deleteFrame.setBounds(200, 200, 400, 300);
         deleteFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         deleteFrame.setLayout(null);
+        deleteFrame.setResizable(false);
 
         ArrayList<String> list = listOperation.watchList.showAll();
         String[] movie = new String[list.size()];
